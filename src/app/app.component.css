@@ -7,3 +7,39 @@
 button{
     width: 100%;
 }
+
+.inputWithIcon input[type=email] {
+    padding-left: 30px;
+}
+
+.inputWithIcon1 input[type=password] {
+    padding-left: 30px;
+}
+
+.inputWithIcon .inputWithIcon1 {
+    position: relative;
+} 
+
+.inputWithIcon i {
+    position: relative;
+    left: 0;
+    bottom: 33px;
+    padding: 9px 8px;
+    color: #aaa;
+}
+
+.inputWithIcon1 i {
+    position: relative;
+    left: 0;
+    bottom: 39px;
+    padding: 9px 8px;
+    color: #aaa;
+}
+
+.Hover a {
+    text-decoration: underline;
+}
+
+.Hover a:hover {
+    text-decoration: none;
+}
