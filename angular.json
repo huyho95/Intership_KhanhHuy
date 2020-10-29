@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "intership-KhanhHuy"
+  "defaultProject": "intership-KhanhHuy",
+  "cli": {
+    "analytics": "e8432e0c-8773-444f-96aa-0f6060650dde"
+  }
 }
