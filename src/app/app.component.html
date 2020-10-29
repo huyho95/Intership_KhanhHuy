@@ -1,10 +1,31 @@
-<!-- NG-ZORRO
-<a href="https://github.com/NG-ZORRO/ng-zorro-antd" target="_blank" style="display: flex;align-items: center;justify-content: center;height: 100%;width: 100%;">
-  <img height="300" src="https://img.alicdn.com/tfs/TB1X.qJJgHqK1RjSZFgXXa7JXXa-89-131.svg">
-</a> -->
-
-<a routerLink="/sign-in">Sign In</a> 
-<br>
-<a routerLink="/sign-up">Sign Up</a>
-<!-- routerLink: để cho trang web tự chuyển qua mà không cần load lại  -->
-<router-outlet></router-outlet>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body class="Mybody">
+  <div class="container Content">
+      <div class="row h-100">
+          <div class="col-4"></div>
+          <div class="col-4">
+              <form class="d-flex h-100 flex-column justify-content-center align-items-center">
+                  <h3 class="font-weight-normal">Please sign in</h3>
+                  <input type="email" class="form-control mt-2" placeholder="Email address" required>   
+                  <input type="email" class="form-control mb-2"  placeholder="Password" required>
+                  <div class="flex-row mt-2">
+                      <input type="checkbox"> Remember me
+                  </div>            
+                  <button class="btn btn-lg btn-primary mt-4">Sign in</button> 
+                  <p class="mt-5 text-muted">© 2017-2018</p>       
+              </form>
+          </div>
+          <div class="col-4"></div>
+      </div>
+  </div>     
+</body>
+</html>
