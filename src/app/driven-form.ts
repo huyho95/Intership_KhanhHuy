@@ -1,0 +1,8 @@
+export class DrivenForm {
+    
+    constructor(
+        public id: number,
+        public email: string,
+        public password: string
+    ) {}
+}
