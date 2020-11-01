@@ -5,7 +5,7 @@ import { DrivenForm } from '../driven-form';
 @Component({
   selector: 'app-driven-form',
   templateUrl: './driven-form.component.html',
-  styleUrls: ['./driven-form.component.css']
+  styleUrls: ['./driven-form.component.scss']
 })
 export class DrivenFormComponent implements OnInit {
 

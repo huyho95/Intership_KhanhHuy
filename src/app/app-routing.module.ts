@@ -1,13 +1,23 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SignInComponent } from './auth/sign-in/sign-in.component';
-import { SignUpComponent } from './auth/sign-up/sign-up.component';
+import { AuthGuardService } from './shared/service/auth-guard.service';
+
 
 const routes: Routes = [
-  
+  {
+    path: '',
+    pathMatch: 'prefix', //default
+    redirectTo: 'dashboard'
+  },
   {
     path: '',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+    // điều hướng file
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
+    canActivate: [AuthGuardService]
   }
 ];
 

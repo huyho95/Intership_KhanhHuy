@@ -11,6 +11,7 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { DrivenFormComponent } from './driven-form/driven-form.component';
+import { AuthGuardService } from './shared/service/auth-guard.service';
 
 registerLocaleData(en);
 
@@ -28,7 +29,7 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     ReactiveFormsModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [{ provide: NZ_I18N, useValue: en_US }, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
