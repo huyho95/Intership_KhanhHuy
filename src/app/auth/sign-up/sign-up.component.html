@@ -27,21 +27,35 @@
                         <span style="font-size: 17px; font-weight: bold" class="font-italic">(SIGN UP)</span>
                     </h3>
                     <span class="inputWithIcon" >
-                        <input type="email" name="email" class="form-control mt-2"
-                            placeholder="Email address (*)" size="100px"  required email formControlName="email" />
+                        <input class="form-control mt-2" id="email"
+                            placeholder="Email address (*)" size="100px" formControlName="email" />
                         <i class="far fa-envelope" aria-hidden="true"></i>
                     </span>
-                    <!-- <div *ngIf="submitted && txtEmail.errors?.required">
+                    <div *ngIf="submitted && email.errors?.required">
                         <span style="color: red; font-size: 13px;text-align: inherit" class="font-italic">
                             Trường này là bắt buộc nhập (This field is required)
                         </span>
-                    </div> -->
+                    </div>
+                    <div *ngIf="submitted && email.errors?.gmail">
+                        <span style="color: red; font-size: 13px;text-align: inherit" class="font-italic">
+                            Trường này phải chứa @gmail.com
+                        </span>
+                    </div>
                     <span class="inputWithIcon1">
-                        <input type="password" name="password"  class="form-control mb-2" style="margin-top: 20px"
-                            placeholder="Password (*)" size="100px"  required minlength="8" formControlName="password"/>
+                        <input class="form-control mb-2" id="password" style="margin-top: 20px"
+                            placeholder="Password (*)" size="100px"  formControlName="password" />
                         <i class="fas fa-lock" aria-hidden="true"></i>
                     </span>
-
+                    <div *ngIf="submitted && password.errors?.required">
+                        <span style="color: red; font-size: 13px;text-align: inherit" class="font-italic">
+                            Trường này là bắt buộc nhập (This field is required)
+                        </span>
+                    </div>
+                    <div *ngIf="submitted && password.errors?.minlength">
+                        <span style="color: red; font-size: 13px;text-align: inherit" class="font-italic">
+                            Trường này tối thiểu 8 kí tự (This field contains a minimum of 8 characters)
+                        </span>
+                    </div>
                     <!-- <div *ngIf="submitted && txtEmail.errors?.required || submitted && txtPassword.errors?.required || submitted && txtPassword.errors?.minlength">
                         <span style="color: red; font-size: 13px;text-align: inherit" class="font-italic ">
                             Mật khẩu phải có ít nhất 8 kí tự, trong đó có it nhất 1 chữ hoa,
@@ -55,7 +69,7 @@
                         <a class="text-primary" href="" style="text-decoration: none">Quên mật khẩu <span
                                 class="font-italic">(Forgot password)</span> ?</a>
                     </div> -->
-                    <button class="btn btn-lg btn-primary mt-4">Sign Up</button>
+                    <button type="submit" class="btn btn-lg btn-primary mt-4">Sign Up</button>
                     <!-- <div class="Hover mt-5">
                         <a style="text-decoration: under" class="mt-5 text-primary">Bạn chưa có tài khoản? - Đăng ký tại
                             đây</a>

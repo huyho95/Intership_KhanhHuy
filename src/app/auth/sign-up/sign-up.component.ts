@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { gmailValidators } from './validators/custom.validators';
 
 @Component({
   selector: 'app-sign-up',
@@ -7,18 +8,30 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit {
+  submitted = false;
   formSignUp: FormGroup;
-  constructor() {
-    this.formSignUp = new FormGroup({
-      email: new FormControl(),
-      password: new FormControl()
-    })
-   }
+  constructor() {}
 
   ngOnInit(): void {
+    this.formSignUp = new FormGroup({
+    email: new FormControl('',[Validators.required, gmailValidators]),
+    password: new FormControl('',[Validators.required, Validators.minLength(8)])
+    })
   }
 
-  onSubmitSignUp(){
-    console.log(this.formSignUp.value)
+  onSubmitSignUp() {
+    this.submitted = true;
+    console.log(this.formSignUp.value);
   }
+  
+
+  get email() {
+    return this.formSignUp.get('email');
+  }
+  
+  get password() {
+    return this.formSignUp.get('password');
+  }
+
+
 }
