@@ -28,22 +28,22 @@
                     </h3>
                     <span class="inputWithIcon" >
                         <input class="form-control mt-2" id="email"
-                            placeholder="Email address (*)" size="100px" formControlName="email" />
+                            placeholder="Email address (*)" size="100px" formControlName="amail" />
                         <i class="far fa-envelope" aria-hidden="true"></i>
                     </span>
-                    <div *ngIf="submitted && email.errors?.required">
+                    <div *ngIf="submitted && amail.errors?.required">
                         <span style="color: red; font-size: 13px;text-align: inherit" class="font-italic">
                             Trường này là bắt buộc nhập (This field is required)
                         </span>
                     </div>
-                    <div *ngIf="submitted && email.errors?.gmail">
+                    <div *ngIf="submitted && amail.errors?.gmail">
                         <span style="color: red; font-size: 13px;text-align: inherit" class="font-italic">
-                            Trường này phải chứa @gmail.com
+                            Trường này phải chứa đuôi @gmail.com (This fiel contains @gmail.com extension )
                         </span>
                     </div>
                     <span class="inputWithIcon1">
                         <input class="form-control mb-2" id="password" style="margin-top: 20px"
-                            placeholder="Password (*)" size="100px"  formControlName="password" />
+                            placeholder="Password (*)" size="100px"  formControlName="password"/>
                         <i class="fas fa-lock" aria-hidden="true"></i>
                     </span>
                     <div *ngIf="submitted && password.errors?.required">

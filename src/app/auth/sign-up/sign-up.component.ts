@@ -25,10 +25,10 @@ export class SignUpComponent implements OnInit {
   }
   
 
-  get email() {
+  get amail() {
     return this.formSignUp.get('email');
   }
-  
+  // Chưa hiểu get lắm
   get password() {
     return this.formSignUp.get('password');
   }
