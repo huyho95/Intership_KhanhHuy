@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Huy",
+      "mobile": "123456798",
+      "email": "huyho95@gmail.com",
+      "password": "987654321"
+    },
+    {
+      "name": "asd",
+      "mobile": "",
+      "email": "",
+      "password": "",
+      "id": 4
+    },
+    {
+      "name": "asdasd",
+      "mobile": "",
+      "email": "",
+      "password": "",
+      "id": 5
+    }
+  ]
+}
