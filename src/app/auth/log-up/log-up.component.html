@@ -1,3 +1,4 @@
+
 <div class="container">
     <form #myForm="ngForm">
         <div class="form-group">
@@ -39,7 +40,8 @@
                 <td>{{ user.email }}</td>
                 <td>{{ user.password }}</td>
                 <td><button (click)="editUser(user)" class="btn btn-warning" >Edit</button></td>
-                <td><button (click)="deleteUser(user)" class="btn btn-danger">Delete</button></td>
+                <!-- <td><button (click)="showDeleteConfirm()" class="btn btn-danger">Delete</button></td> -->
+                <button nz-button nzType="dashed" (click)="showDeleteConfirm()">Delete</button>
             </tr>
         </tbody>
     </table>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/shared/model/user.model';
 import { CommonService } from '../../common.service';
+import { NzModalService } from 'ng-zorro-antd/modal';
+
 
 @Component({
   selector: 'app-log-up',
@@ -20,12 +22,12 @@ export class LogUpComponent implements OnInit {
   }
   
 
-  constructor(private commonService: CommonService) { }
+  constructor(private commonService: CommonService, private _nzModalService: NzModalService ) { }
 
   ngOnInit(): void {
     this.getLatestUser();
   }
-
+  
   addUser(myForm) {
     // console.log(myForm.value)
     this.commonService.createUser(myForm.value).subscribe((response)=>{
@@ -56,4 +58,28 @@ export class LogUpComponent implements OnInit {
       this.getLatestUser();
     })
   }
+
+  WithZorroConfirm(message: string) {
+    return function (target: Object, key: string | symbol, descriptor: PropertyDescriptor) {
+      const original = descriptor.value;
+  
+      descriptor.value = function (...args: any[]) {
+        const modal: NzModalService = this._nzModalService;
+        
+        modal.confirm({
+          nzTitle: message,
+          nzOnOk: () => {
+            original.apply(this, args);
+          }
+        });
+      };
+  
+      return descriptor;
+    };
+  }
+
+  // @WithZorroConfirm('Are you sure to delete this?')
+  // showDeleteConfirm(){
+    
+  // }
 }

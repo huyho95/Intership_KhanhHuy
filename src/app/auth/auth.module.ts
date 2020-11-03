@@ -7,6 +7,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { LogUpComponent } from './log-up/log-up.component';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 @NgModule({
   declarations: [SignInComponent, SignUpComponent, LogUpComponent],
@@ -16,7 +17,8 @@ import { LogUpComponent } from './log-up/log-up.component';
     NzButtonModule,
     FormsModule,
     ReactiveFormsModule
-  ]
+  ],
+  providers: [NzModalService]
 
 })
 export class AuthModule { }
