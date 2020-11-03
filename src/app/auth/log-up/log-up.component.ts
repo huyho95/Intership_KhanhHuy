@@ -22,7 +22,7 @@ export class LogUpComponent implements OnInit {
   }
   
 
-  constructor(private commonService: CommonService, private _nzModalService: NzModalService ) { }
+  constructor(private commonService: CommonService,private modal: NzModalService) { }
 
   ngOnInit(): void {
     this.getLatestUser();
@@ -46,11 +46,11 @@ export class LogUpComponent implements OnInit {
     this.userObj = user;
   }
 
-  deleteUser(user) {
-    this.commonService.deleteUser(user).subscribe(()=>{
-      this.getLatestUser();
-    })
-  }
+  // deleteUser(user) {
+  //   this.commonService.deleteUser(user).subscribe(()=>{
+  //     this.getLatestUser();
+  //   })
+  // }
 
   updateUser() {
     this.isEdit = !this.isEdit;
@@ -59,27 +59,16 @@ export class LogUpComponent implements OnInit {
     })
   }
 
-  WithZorroConfirm(message: string) {
-    return function (target: Object, key: string | symbol, descriptor: PropertyDescriptor) {
-      const original = descriptor.value;
-  
-      descriptor.value = function (...args: any[]) {
-        const modal: NzModalService = this._nzModalService;
-        
-        modal.confirm({
-          nzTitle: message,
-          nzOnOk: () => {
-            original.apply(this, args);
-          }
-        });
-      };
-  
-      return descriptor;
-    };
+  // Hiện pop-up xóa user
+  showDeleteConfirm(user): void {
+    this.modal.confirm({
+      nzTitle: `Are you sure delete ${ user.email } ?`,
+      // nzContent: '<p>All information associated to profile will be permanently deleted.<br><span class="text-danger">This operation can not be undone.</span></p>',
+      nzOnOk: () => this.commonService.deleteUser(user).subscribe(()=>{
+        this.getLatestUser();
+      }),
+      nzCancelText: 'No',
+      nzOnCancel: () => console.log('Cancel')
+    });
   }
-
-  // @WithZorroConfirm('Are you sure to delete this?')
-  // showDeleteConfirm(){
-    
-  // }
 }

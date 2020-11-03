@@ -40,8 +40,8 @@
                 <td>{{ user.email }}</td>
                 <td>{{ user.password }}</td>
                 <td><button (click)="editUser(user)" class="btn btn-warning" >Edit</button></td>
-                <!-- <td><button (click)="showDeleteConfirm()" class="btn btn-danger">Delete</button></td> -->
-                <button nz-button nzType="dashed" (click)="showDeleteConfirm()">Delete</button>
+                <td><button (click)="showDeleteConfirm(user)" class="btn btn-danger">Delete</button></td>
+                <!-- <button nz-button nzType="dashed" (click)="showDeleteConfirm()">Delete</button> -->
             </tr>
         </tbody>
     </table>

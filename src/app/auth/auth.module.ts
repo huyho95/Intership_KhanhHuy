@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { OverlayModule } from '@angular/cdk/overlay'
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { SignInComponent } from './sign-in/sign-in.component';
@@ -16,7 +17,8 @@ import { NzModalService } from 'ng-zorro-antd/modal';
     AuthRoutingModule,
     NzButtonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    OverlayModule
   ],
   providers: [NzModalService]
 
