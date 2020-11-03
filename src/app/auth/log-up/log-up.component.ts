@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'src/app/shared/model/user.model';
 import { CommonService } from '../../common.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
-
 
 @Component({
   selector: 'app-log-up',
@@ -13,6 +13,8 @@ export class LogUpComponent implements OnInit {
   title = "angularCRUD";
   allUser: Object;
   isEdit = false;
+  alert = false;
+  // public message = "Sign Up success";
   userObj = {
     name: '',
     mobile: '',
@@ -22,7 +24,7 @@ export class LogUpComponent implements OnInit {
   }
   
 
-  constructor(private commonService: CommonService,private modal: NzModalService) { }
+  constructor(private commonService: CommonService, private modal: NzModalService, private router: Router) { }
 
   ngOnInit(): void {
     this.getLatestUser();
@@ -32,6 +34,8 @@ export class LogUpComponent implements OnInit {
     // console.log(myForm.value)
     this.commonService.createUser(myForm.value).subscribe((response)=>{
       this.getLatestUser();
+      // alert(this.message)
+      this.alert = true;
     })
   }
 

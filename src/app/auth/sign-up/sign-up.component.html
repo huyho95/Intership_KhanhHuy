@@ -16,7 +16,7 @@
         <div class="row h-100">
             <div class="col-4"></div>
             <div class="col-4"
-                style="background-color: white; border-top-right-radius: 10px; border-bottom-right-radius: 10px">
+                style="background-color: white; border-radius: 20px;">
                 <form (ngSubmit) = "onSubmitSignUp();" [formGroup]="formSignUp"
                     class="d-flex h-100 flex-column justify-content-center align-items-center form-group">
                     <div class="align-self-end" style="margin-right: 10px">
@@ -28,15 +28,15 @@
                     </h3>
                     <span class="inputWithIcon" >
                         <input class="form-control mt-2" id="email"
-                            placeholder="Email address (*)" size="100px" formControlName="amail" />
+                            placeholder="Email address (*)" size="100px" formControlName="email" />
                         <i class="far fa-envelope" aria-hidden="true"></i>
                     </span>
-                    <div *ngIf="submitted && amail.errors?.required">
+                    <div *ngIf="submitted && email.errors?.required">
                         <span style="color: red; font-size: 13px;text-align: inherit" class="font-italic">
                             Trường này là bắt buộc nhập (This field is required)
                         </span>
                     </div>
-                    <div *ngIf="submitted && amail.errors?.gmail">
+                    <div *ngIf="submitted && email.errors?.ggmail">
                         <span style="color: red; font-size: 13px;text-align: inherit" class="font-italic">
                             Trường này phải chứa đuôi @gmail.com (This fiel contains @gmail.com extension )
                         </span>

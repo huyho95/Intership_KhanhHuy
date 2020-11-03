@@ -25,7 +25,7 @@ export class SignUpComponent implements OnInit {
   }
   
 
-  get amail() {
+  get email() {
     return this.formSignUp.get('email');
   }
   // Chưa hiểu get lắm
