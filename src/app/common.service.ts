@@ -5,14 +5,18 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CommonService {
 
-  constructor(private _http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   createUser(user){
-    return this._http.post("http://localhost:3000/users",user);
+    return this.http.post("http://localhost:3000/users",user);
   }
   getAllUser(){
-    return this._http.get("http://localhost:3000/users")
+    return this.http.get("http://localhost:3000/users")
   }
-  updateUser(){}
-  deleteUser(){}
+  updateUser(user){
+    return this.http.put("http://localhost:3000/users/" + user.id, user)
+  }
+  deleteUser(user){
+    return this.http.delete("http://localhost:3000/users/" + user.id)
+  }
 }
