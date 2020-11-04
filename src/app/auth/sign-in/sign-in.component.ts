@@ -9,6 +9,7 @@ import { UserLoginService } from 'src/app/shared/service/user-login.service';
 })
 export class SignInComponent implements OnInit {
   submitted: boolean;
+  public message = "log in failed"
   constructor(
     private userLoginService: UserLoginService,
     private router: Router
@@ -17,13 +18,25 @@ export class SignInComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // onSubmit(formSignIn: any) {
+  //   this.submitted = true;
+  //   const isLogin = this.userLoginService.isLogin(formSignIn.form.value.email, formSignIn.form.value.password);
+  //   if (isLogin) {
+  //     localStorage.setItem('shit', JSON.stringify(formSignIn.form.value) ); // JSON.stringify: chuyển object thành json trên local localStorage
+  //     this.router.navigate(['/dashboard']);
+  //   }
+  // }
+
   onSubmit(formSignIn: any) {
     this.submitted = true;
-    const isLogin = this.userLoginService.isLogin(formSignIn.form.value.email, formSignIn.form.value.password);
-    if (isLogin) {
-      localStorage.setItem('shit', JSON.stringify(formSignIn.form.value) ); // JSON.stringify: chuyển object thành json trên local localStorage
+    this.userLoginService.isLogin(formSignIn.form.value.email, formSignIn.form.value.password).subscribe(res => {
+    if (res) {
+      // localStorage.setItem('shit', JSON.stringify(formSignIn.form.value) ); // JSON.stringify: chuyển object thành json trên local localStorage
       this.router.navigate(['/dashboard']);
     }
+    else return alert(this.message)
+    })
+   
   }
 
 }

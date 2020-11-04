@@ -5,28 +5,14 @@
       "name": "Huy",
       "mobile": "123456798",
       "email": "huyho95@gmail.com",
-      "password": "987654321"
+      "password": "123456789"
     },
     {
-      "name": "quyen an cuc",
-      "mobile": "5489434",
+      "name": "Quyen",
+      "mobile": "1234567489",
       "email": "quyendang@gmail.in",
-      "password": "7454321654",
+      "password": "123456789",
       "id": 2
-    },
-    {
-      "name": "quyen",
-      "mobile": "4564321",
-      "email": "a@gmail.com",
-      "password": "6547123",
-      "id": 3
-    },
-    {
-      "name": "asd",
-      "mobile": "asd",
-      "email": "asd",
-      "password": "asd",
-      "id": 4
     }
   ]
 }
