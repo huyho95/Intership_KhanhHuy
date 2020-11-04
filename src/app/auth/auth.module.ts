@@ -17,7 +17,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
     AuthRoutingModule,
     NzButtonModule,
     FormsModule,
-    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
+    ReactiveFormsModule,
     OverlayModule
   ],
   providers: [NzModalService]

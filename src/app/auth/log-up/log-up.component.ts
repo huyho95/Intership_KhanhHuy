@@ -27,31 +27,22 @@ export class LogUpComponent implements OnInit {
     password: '',
     id: ''
   }
-  
+  unamePattern = "^[a-z0-9_-]{8,15}$";
 
   constructor(private commonService: CommonService, private modal: NzModalService, private router: Router) { }
 
   ngOnInit(): void {
     this.formLogUp = new FormGroup({
-      name: new FormControl('',Validators.pattern[('A-Za-z0-9_')]), 
-      mobile: new FormControl(),
-      email: new FormControl(),
-      password: new FormControl(),
+      id: new FormControl(this.userObj.id), 
+      name: new FormControl(this.userObj.name), 
+      mobile: new FormControl(this.userObj.mobile),
+      email: new FormControl(this.userObj.email),
+      password: new FormControl(this.userObj.password),
     })
 
     this.getLatestUser();
   }
   
-  addUser(formLogUp) {
-    // console.log(formLogUp.value)
-    this.submitted = true;
-    this.commonService.createUser(formLogUp.value).subscribe((response)=>{
-      this.getLatestUser();
-      // alert(this.message)
-      this.alert = true;
-    })
-  }
-
   get name() {
     return this.formLogUp.get('name');
   }
@@ -67,9 +58,17 @@ export class LogUpComponent implements OnInit {
   get password() {
     return this.formLogUp.get('password');
   }
-  
-  
 
+  addUser(formLogUp) {
+    this.submitted = true;
+    this.commonService.createUser(formLogUp.value).subscribe((response)=>{
+      this.getLatestUser();
+      // // alert(this.message)
+      // this.alert = true;
+
+    })
+  }
+  
   getLatestUser(){
     this.commonService.getAllUser().subscribe((response)=>{
       this.allUser = response
@@ -79,7 +78,10 @@ export class LogUpComponent implements OnInit {
   // Edit user
   editUser(user) {
     this.isEdit = true;
-    this.userObj = user;
+    // this.userObj = user;
+    this.formLogUp.reset(this.userObj);
+    this.formLogUp.patchValue(user);
+    // console.log(user)
   }
 
   // deleteUser(user) {
@@ -91,7 +93,7 @@ export class LogUpComponent implements OnInit {
   // Update user  
   updateUser() {
     this.isEdit = !this.isEdit;
-    this.commonService.updateUser(this.userObj).subscribe(()=>{
+    this.commonService.updateUser(this.formLogUp.value).subscribe(()=>{
       this.getLatestUser();
     })
   }

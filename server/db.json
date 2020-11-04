@@ -8,11 +8,11 @@
       "password": "123456789"
     },
     {
-      "name": "Quyen",
+      "id": 2,
+      "name": "Quyen an cut",
       "mobile": "1234567489",
       "email": "quyendang@gmail.in",
-      "password": "123456789",
-      "id": 2
+      "password": "123456789"
     }
   ]
 }
