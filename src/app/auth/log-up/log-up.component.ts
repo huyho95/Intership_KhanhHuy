@@ -4,6 +4,9 @@ import { User } from 'src/app/shared/model/user.model';
 import { CommonService } from '../../common.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
 
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+// import { gmailValidators } from './validators/custom.validators'
+
 @Component({
   selector: 'app-log-up',
   templateUrl: './log-up.component.html',
@@ -11,6 +14,8 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 })
 export class LogUpComponent implements OnInit {
   title = "angularCRUD";
+  formLogUp: FormGroup;
+  submitted = false;
   allUser: Object;
   isEdit = false;
   alert = false;
@@ -27,17 +32,43 @@ export class LogUpComponent implements OnInit {
   constructor(private commonService: CommonService, private modal: NzModalService, private router: Router) { }
 
   ngOnInit(): void {
+    this.formLogUp = new FormGroup({
+      name: new FormControl('',Validators.pattern[('A-Za-z0-9_')]), 
+      mobile: new FormControl(),
+      email: new FormControl(),
+      password: new FormControl(),
+    })
+
     this.getLatestUser();
   }
   
-  addUser(myForm) {
-    // console.log(myForm.value)
-    this.commonService.createUser(myForm.value).subscribe((response)=>{
+  addUser(formLogUp) {
+    // console.log(formLogUp.value)
+    this.submitted = true;
+    this.commonService.createUser(formLogUp.value).subscribe((response)=>{
       this.getLatestUser();
       // alert(this.message)
       this.alert = true;
     })
   }
+
+  get name() {
+    return this.formLogUp.get('name');
+  }
+  // Chưa hiểu get lắm
+  get mobile() {
+    return this.formLogUp.get('mobile');
+  }
+
+  get email() {
+    return this.formLogUp.get('email');
+  }
+  // Chưa hiểu get lắm
+  get password() {
+    return this.formLogUp.get('password');
+  }
+  
+  
 
   getLatestUser(){
     this.commonService.getAllUser().subscribe((response)=>{
@@ -45,6 +76,7 @@ export class LogUpComponent implements OnInit {
     })
   }
 
+  // Edit user
   editUser(user) {
     this.isEdit = true;
     this.userObj = user;
@@ -56,6 +88,7 @@ export class LogUpComponent implements OnInit {
   //   })
   // }
 
+  // Update user  
   updateUser() {
     this.isEdit = !this.isEdit;
     this.commonService.updateUser(this.userObj).subscribe(()=>{

@@ -16,11 +16,17 @@ export class UserLoginService {
     return this.http.get("http://localhost:3000/users")
   }
 
+
+  // isLogin(email: string, password: string): boolean {
+  //   const listUser = this.getUser();
+  //   return listUser.some((item, index) => item.email === email && item.password === password);
+  // }
+
   isLogin(email: string, password: string): Observable<boolean> {
     return new Observable(resObser => {
-      this.getUser().subscribe(res => {
+        this.getUser().subscribe(res => {
         const isLogin = res.some((item, index) => item.email === email && item.password === password);
-        resObser.next(isLogin);
+      resObser.next(isLogin);
       }, err => {})
     })
    

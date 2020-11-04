@@ -4,22 +4,29 @@
 
 <div class="container">
     <button type="button" class="btn btn-success mb-3 mt-3" routerLink="/sign-in">Back</button>
-    <form #myForm="ngForm">
+    <form [formGroup]="formLogUp"> 
         <div class="form-group">
             <label for="">Full name</label>
-            <input type="email" class="form-control" name="name" [(ngModel)]="userObj.name">
+            <input  class="form-control" name="name" formControlName="name" [(ngModel)]="userObj.name">
         </div>
+
+        <div *ngIf="submitted && name.errors?.pattern">
+            <span style="color: red; font-size: 13px;text-align: inherit" class="font-italic">
+                Trường này không được chứa kí tự đặc biệt
+            </span>
+        </div>
+
         <div class="form-group">
             <label for="">Mobile Number</label>
-            <input type="email" class="form-control" name="mobile" [(ngModel)]="userObj.mobile">
+            <input  class="form-control" name="mobile" formControlName="mobile" [(ngModel)]="userObj.mobile">
         </div>
         <div class="form-group">
             <label for="">Email Address</label>
-            <input type="email" class="form-control" name="email" [(ngModel)]="userObj.email">
+            <input  class="form-control" name="email" formControlName="email" [(ngModel)]="userObj.email">
         </div>
         <div class="form-group">
             <label for="">Password</label>
-            <input type="password" class="form-control" name="password" [(ngModel)]="userObj.password">
+            <input  class="form-control" name="password" formControlName="password" [(ngModel)]="userObj.password">
         </div>
         
         <button type="button" class="btn btn-primary" (click)="addUser(myForm)" *ngIf="!isEdit">Submit</button>

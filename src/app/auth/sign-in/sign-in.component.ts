@@ -9,7 +9,7 @@ import { UserLoginService } from 'src/app/shared/service/user-login.service';
 })
 export class SignInComponent implements OnInit {
   submitted: boolean;
-  public message = "log in failed"
+  public message = "email or password is incorrect"
   constructor(
     private userLoginService: UserLoginService,
     private router: Router
