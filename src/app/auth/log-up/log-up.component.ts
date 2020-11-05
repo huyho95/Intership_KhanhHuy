@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/shared/model/user.model';
+// import { User } from 'src/app/shared/model/user.model';
 import { CommonService } from '../../common.service';
 import { NzModalService } from 'ng-zorro-antd/modal';
-
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-// import { gmailValidators } from './validators/custom.validators'
+import { gmailValidators } from './validators/custom.validators'
 
 @Component({
   selector: 'app-log-up',
@@ -15,7 +14,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class LogUpComponent implements OnInit {
   title = "angularCRUD";
   formLogUp: FormGroup;
-  submitted = false;
+  // submitted = false;
   allUser: Object;
   isEdit = false;
   alert = false;
@@ -25,19 +24,26 @@ export class LogUpComponent implements OnInit {
     mobile: '',
     email: '',
     password: '',
+    dateOfBirth: '',
     id: ''
   }
-  unamePattern = "^[a-z0-9_-]{8,15}$";
+  unamePattern = new RegExp("^[a-zA-Z0-9\_]+$");
+  // str = this.userObj.name;
+  // regex = new RegExp("^[a-zA-Z0-9\_]+$");
+  // + : xuất hiện 1 hoặc nhiều lần 
+
+  date: null;
 
   constructor(private commonService: CommonService, private modal: NzModalService, private router: Router) { }
 
   ngOnInit(): void {
     this.formLogUp = new FormGroup({
       id: new FormControl(this.userObj.id), 
-      name: new FormControl(this.userObj.name), 
+      name: new FormControl(this.userObj.name,[Validators.required, Validators.pattern(this.unamePattern)]), 
       mobile: new FormControl(this.userObj.mobile),
-      email: new FormControl(this.userObj.email),
+      email: new FormControl(this.userObj.email,[Validators.required,gmailValidators]),
       password: new FormControl(this.userObj.password),
+      dateOfBirth: new FormControl(this.userObj.dateOfBirth)
     })
 
     this.getLatestUser();
@@ -59,16 +65,25 @@ export class LogUpComponent implements OnInit {
     return this.formLogUp.get('password');
   }
 
+  get dateOfBirth() {
+    return this.formLogUp.get('dateOfBirth');
+  }
+
+
+  // Add User
   addUser(formLogUp) {
-    this.submitted = true;
+    // this.submitted = true;
+    // if (this.regex.test(this.str)) {
+      // this.commonService.createUser(formLogUp.value).subscribe((response)=>{
+      // this.getLatestUser();
+      // })
+    // }   Chưa làm ra
     this.commonService.createUser(formLogUp.value).subscribe((response)=>{
       this.getLatestUser();
-      // // alert(this.message)
-      // this.alert = true;
-
-    })
+      })
   }
   
+  // getAllUser
   getLatestUser(){
     this.commonService.getAllUser().subscribe((response)=>{
       this.allUser = response
@@ -80,8 +95,11 @@ export class LogUpComponent implements OnInit {
     this.isEdit = true;
     // this.userObj = user;
     this.formLogUp.reset(this.userObj);
+    //reset: The form now resets, all the input fields go back to their initial state and any valid, touched or dirty properties are also reset to their starting values.
+    // trả về giá trị ban đầu của form, tất cả là giá trị là rỗng name:'', mobile:'', email='', password=''
     this.formLogUp.patchValue(user);
-    // console.log(user)
+    // set giá trị của user được click "edit" hiện có vào lại, lúc này chưa update
+    console.log(user)
   }
 
   // deleteUser(user) {
@@ -92,7 +110,7 @@ export class LogUpComponent implements OnInit {
 
   // Update user  
   updateUser() {
-    this.isEdit = !this.isEdit;
+    // this.isEdit = !this.isEdit;
     this.commonService.updateUser(this.formLogUp.value).subscribe(()=>{
       this.getLatestUser();
     })
@@ -109,5 +127,10 @@ export class LogUpComponent implements OnInit {
       nzCancelText: 'No',
       nzOnCancel: () => console.log('Cancel')
     });
+  }
+
+  // Pipe date
+  onChange(result: Date): void {
+    console.log('onChange: ', result);
   }
 }

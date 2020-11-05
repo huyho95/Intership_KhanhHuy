@@ -27,6 +27,7 @@ export class UserLoginService {
         this.getUser().subscribe(res => {
         const isLogin = res.some((item, index) => item.email === email && item.password === password);
       resObser.next(isLogin);
+      // next(): sends any value such as Numbers, Arrays or objects to it’s subscribers.
       }, err => {})
     })
    

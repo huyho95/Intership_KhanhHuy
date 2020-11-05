@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { LogUpComponent } from './log-up/log-up.component';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
 @NgModule({
   declarations: [SignInComponent, SignUpComponent, LogUpComponent],
@@ -18,7 +20,9 @@ import { NzModalService } from 'ng-zorro-antd/modal';
     NzButtonModule,
     FormsModule,
     ReactiveFormsModule,
-    OverlayModule
+    OverlayModule,
+    NzFormModule,
+    NzDatePickerModule
   ],
   providers: [NzModalService]
 

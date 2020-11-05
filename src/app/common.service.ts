@@ -7,8 +7,9 @@ export class CommonService {
 
   constructor(private http: HttpClient) { }
 
-  createUser(user){
-    return this.http.post("http://localhost:3000/users",user);
+  createUser(user: any){
+    user.dateOfBirth = user.dateOfBirth.getTime();
+    return this.http.post("http://localhost:3000/users",user)
   }
   getAllUser(){
     return this.http.get("http://localhost:3000/users")

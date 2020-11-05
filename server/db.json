@@ -5,14 +5,39 @@
       "name": "Huy",
       "mobile": "123456798",
       "email": "huyho95@gmail.com",
-      "password": "123456789"
+      "password": "123456789",
+      "dateOfBirth": "1995-12-08T09:01:56.140Z"
     },
     {
       "id": 2,
-      "name": "Quyen an cut",
+      "name": "Quyen",
       "mobile": "1234567489",
-      "email": "quyendang@gmail.in",
+      "email": "quyendang@gmail.com",
       "password": "123456789"
+    },
+    {
+      "id": 3,
+      "name": "asd",
+      "mobile": "asd",
+      "email": "asd@gmail.com",
+      "password": "asdas",
+      "dateOfBirth": "2020-11-14T09:15:19.783Z"
+    },
+    {
+      "id": 4,
+      "name": "12312313123",
+      "mobile": "",
+      "email": "1@gmail.com",
+      "password": "",
+      "dateOfBirth": "2020-11-19T11:07:53.294Z"
+    },
+    {
+      "id": 5,
+      "name": "Codengu",
+      "mobile": "",
+      "email": "ngu@gmail.com",
+      "password": "",
+      "dateOfBirth": 1605784168738
     }
   ]
 }

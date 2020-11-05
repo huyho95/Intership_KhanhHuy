@@ -3,34 +3,64 @@
 </div>
 
 <div class="container">
-    <button type="button" class="btn btn-success mb-3 mt-3" routerLink="/sign-in">Back</button>
-    <form [formGroup]="formLogUp"> 
-        <div class="form-group">
-            <label for="">Full name</label>
-            <input  class="form-control" name="name" formControlName="name" [pattern]="unamePattern">
-        </div>
-
-        <!-- <div *ngIf="submitted && name.errors?.pattern">
+    <button nzType type="button" class="btn btn-success mb-3 mt-3" routerLink="/sign-in">Back</button>
+    <form [formGroup]="formLogUp" nz-form nzLayout="vertical" > 
+        <nz-form-item >
+            <nz-form-label for="">Full name</nz-form-label>
+            <nz-form-control>
+                <input nz-input formControlName="name" >
+            </nz-form-control>
+        </nz-form-item>
+        <div *ngIf="name.errors?.required">
             <span style="color: red; font-size: 13px;text-align: inherit" class="font-italic">
-                Trường này không được chứa kí tự đặc biệt
+                Trường này là bắt buộc nhập (This field is required)
             </span>
-        </div> -->
+        </div>
 
-        <div class="form-group">
-            <label for="">Mobile Number</label>
-            <input  class="form-control" name="mobile" formControlName="mobile" >
+        <div *ngIf="name.errors?.pattern">
+            <span style="color: red; font-size: 13px;text-align: inherit" class="font-italic">
+                Trường này không được chứa kí tự đặc biệt ( This field cannot contain special characters )
+            </span>
         </div>
-        <div class="form-group">
-            <label for="">Email Address</label>
-            <input  class="form-control" name="email" formControlName="email" >
+
+        <nz-form-item>
+            <nz-form-label for="">Mobile Number</nz-form-label>
+            <nz-form-control>
+                <input nz-input formControlName="mobile" >
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item >
+            <nz-form-label for="">Email Address</nz-form-label>
+            <nz-form-control>
+                <input nz-input formControlName="email" >
+            </nz-form-control>
+        </nz-form-item>
+        <div *ngIf="email.errors?.required">
+            <span style="color: red; font-size: 13px;text-align: inherit" class="font-italic">
+                Trường này là bắt buộc nhập (This field is required)
+            </span>
         </div>
-        <div class="form-group">
-            <label for="">Password</label>
-            <input  class="form-control" name="password" formControlName="password">
+        <div *ngIf="email.errors?.ggmail">
+            <span style="color: red; font-size: 13px;text-align: inherit" class="font-italic">
+                Trường này phải chứa đuôi @gmail.com (This fiel contains @gmail.com extension )
+            </span>
         </div>
-        
-        <button type="button" class="btn btn-primary" (click)="addUser(formLogUp)" *ngIf="!isEdit">Submit</button>
-        <button type="button" class="btn btn-info" (click)="updateUser()" *ngIf="isEdit">Update</button>
+        <nz-form-item >
+            <nz-form-label for="">Password</nz-form-label>
+            <nz-form-control>
+                <input nz-input formControlName="password">
+            </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+            <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>Date Of Birth</nz-form-label>
+            <nz-form-control [nzSm]="16" [nzXs]="24">
+            <nz-date-picker formControlName="dateOfBirth"></nz-date-picker>
+            </nz-form-control>
+          </nz-form-item>
+
+        <br>
+        <button nz-button nzType="primary" [disabled]="name.errors?.required || name.errors?.pattern || email.errors?.required || email.errors?.ggmail" (click)="addUser(formLogUp)" *ngIf="!isEdit">Submit</button>
+        <button nz-button  nzType="primary" (click)="updateUser()" *ngIf="isEdit">Update</button>
     </form>
     <br>
     <table class="table">
@@ -40,6 +70,7 @@
                 <th scope="col">Mobile</th>
                 <th scope="col">Email</th>
                 <th scope="col">Password</th>
+                <th scope="col">DateOfBirth</th>
                 <th scope="col">Edit</th>
                 <th scope="col">Delete</th>
             </tr>
@@ -50,6 +81,7 @@
                 <td>{{ user.mobile }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.password }}</td>
+                <td>{{ user.dateOfBirth | date: 'dd-MM-yyyy' }}</td>
                 <td><button (click)="editUser(user)" class="btn btn-warning" >Edit</button></td>
                 <td><button (click)="showDeleteConfirm(user)" class="btn btn-danger">Delete</button></td>
                 <!-- <button nz-button nzType="dashed" (click)="showDeleteConfirm()">Delete</button> -->

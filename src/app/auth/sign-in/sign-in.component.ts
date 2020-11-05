@@ -25,7 +25,7 @@ export class SignInComponent implements OnInit {
   //     localStorage.setItem('shit', JSON.stringify(formSignIn.form.value) ); // JSON.stringify: chuyển object thành json trên local localStorage
   //     this.router.navigate(['/dashboard']);
   //   }
-  // }
+  // }  
 
   onSubmit(formSignIn: any) {
     this.submitted = true;
