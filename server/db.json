@@ -1,43 +1,20 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "Huy",
-      "mobile": "123456798",
+      "id": 6,
+      "name": "hong",
+      "mobile": "32165487",
+      "email": "hong@gmail.com",
+      "password": "1234987654",
+      "dateOfBirth": 1604630163659
+    },
+    {
+      "id": 7,
+      "name": "huy",
+      "mobile": "321456987",
       "email": "huyho95@gmail.com",
-      "password": "123456789",
-      "dateOfBirth": "1995-12-08T09:01:56.140Z"
-    },
-    {
-      "id": 2,
-      "name": "Quyen",
-      "mobile": "1234567489",
-      "email": "quyendang@gmail.com",
-      "password": "123456789"
-    },
-    {
-      "id": 3,
-      "name": "asd",
-      "mobile": "asd",
-      "email": "asd@gmail.com",
-      "password": "asdas",
-      "dateOfBirth": "2020-11-14T09:15:19.783Z"
-    },
-    {
-      "id": 4,
-      "name": "12312313123",
-      "mobile": "",
-      "email": "1@gmail.com",
-      "password": "",
-      "dateOfBirth": "2020-11-19T11:07:53.294Z"
-    },
-    {
-      "id": 5,
-      "name": "Codengu",
-      "mobile": "",
-      "email": "ngu@gmail.com",
-      "password": "",
-      "dateOfBirth": 1605784168738
+      "password": "123465798",
+      "dateOfBirth": 1604889456428
     }
   ]
 }

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { User } from './shared/model/user.model';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -7,7 +9,7 @@ export class CommonService {
 
   constructor(private http: HttpClient) { }
 
-  createUser(user: any){
+  createUser(user: User){
     user.dateOfBirth = user.dateOfBirth.getTime();
     return this.http.post("http://localhost:3000/users",user)
   }
