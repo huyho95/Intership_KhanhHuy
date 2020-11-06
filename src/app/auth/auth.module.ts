@@ -11,9 +11,10 @@ import { LogUpComponent } from './log-up/log-up.component';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { ColorNumberDirective } from './color-number.directive';
 
 @NgModule({
-  declarations: [SignInComponent, SignUpComponent, LogUpComponent],
+  declarations: [SignInComponent, SignUpComponent, LogUpComponent, ColorNumberDirective],
   imports: [
     CommonModule,
     AuthRoutingModule,

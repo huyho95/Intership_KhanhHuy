@@ -25,14 +25,13 @@ export class LogUpComponent implements OnInit {
     email: '',
     password: '',
     dateOfBirth: '',
+    pipeNumber:'',
     id: ''
   };
   unamePattern = new RegExp('^[a-zA-Z0-9\_]+$');
   // str = this.userObj.name;
   // regex = new RegExp("^[a-zA-Z0-9\_]+$");
   // + : xuất hiện 1 hoặc nhiều lần
-
-  date: null;
 
   constructor(private commonService: CommonService, private modal: NzModalService, private router: Router) { }
 
@@ -43,7 +42,8 @@ export class LogUpComponent implements OnInit {
       mobile: new FormControl(this.userObj.mobile),
       email: new FormControl(this.userObj.email, [Validators.required,gmailValidators]),
       password: new FormControl(this.userObj.password),
-      dateOfBirth: new FormControl(this.userObj.dateOfBirth)
+      dateOfBirth: new FormControl(this.userObj.dateOfBirth),
+      pipeNumber: new FormControl(this.userObj.pipeNumber)
     });
 
     this.getLatestUser();
@@ -68,6 +68,11 @@ export class LogUpComponent implements OnInit {
   get dateOfBirth() {
     return this.formLogUp.get('dateOfBirth');
   }
+
+  get pipeNumber() {
+    return this.formLogUp.get('pipeNumber');
+  }
+  
 
 
   // Add User
@@ -99,7 +104,6 @@ export class LogUpComponent implements OnInit {
     // trả về giá trị ban đầu của form, tất cả là giá trị là rỗng name:'', mobile:'', email='', password=''
     this.formLogUp.patchValue(user);
     // set giá trị của user được click "edit" hiện có vào lại, lúc này chưa update
-    console.log(user)
   }
 
   // deleteUser(user) {
@@ -130,8 +134,4 @@ export class LogUpComponent implements OnInit {
     });
   }
 
-  // Pipe date
-  onChange(result: Date): void {
-    console.log('onChange:', result);
-  }
 }

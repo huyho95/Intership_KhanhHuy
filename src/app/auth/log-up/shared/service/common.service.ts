@@ -18,7 +18,8 @@ export class CommonService {
       mobile: user.mobile,
       email: user.email,
       password: user.password,
-      dateOfBirth: user.dateOfBirth.getTime()
+      dateOfBirth: user.dateOfBirth.getTime(),
+      pipeNumber: user.pipeNumber
     };
     return this.http.post('http://localhost:3000/users', userRequest);
   }
