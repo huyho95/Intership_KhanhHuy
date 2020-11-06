@@ -2,7 +2,7 @@
   "users": [
     {
       "id": 6,
-      "name": "hong",
+      "name": "hong1",
       "mobile": "32165487",
       "email": "hong@gmail.com",
       "password": "1234987654",
@@ -15,6 +15,14 @@
       "email": "huyho95@gmail.com",
       "password": "123465798",
       "dateOfBirth": 1604889456428
+    },
+    {
+      "id": 9,
+      "name": "aaaa",
+      "mobile": "123456789",
+      "email": "huyho96@gmail.com",
+      "password": "123456789",
+      "dateOfBirth": 1604808800167
     }
   ]
 }

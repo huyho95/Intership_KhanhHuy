@@ -11,7 +11,7 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { DrivenFormComponent } from './driven-form/driven-form.component';
-import { AuthGuardService } from './shared/service/auth-guard.service';
+import { AuthGuardService } from './auth/sign-in/shared/service/auth-guard.service';
 
 registerLocaleData(en);
 

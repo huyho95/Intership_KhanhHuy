@@ -4,5 +4,5 @@ export class User {
     mobile: string;
     email: string;
     password: string;
-    dateOfBirth: any;
+    dateOfBirth: number;
 }
