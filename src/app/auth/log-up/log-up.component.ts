@@ -52,7 +52,10 @@ export class LogUpComponent implements OnInit {
   get name() {
     return this.formLogUp.get('name');
   }
-  // Chưa hiểu get lắm
+  // Ở trường name, bên file log-up.component.html, ở phần validators, 
+  // không thể viết name.errors?.required mà phải là formLogUp.controls.name?.errors?.required. 
+  // Vì vậy khai báo hàm get ở đây để thay thế formLogUp.controls.name? = formLogUp.get('name')
+
   get mobile() {
     return this.formLogUp.get('mobile');
   }
@@ -60,7 +63,7 @@ export class LogUpComponent implements OnInit {
   get email() {
     return this.formLogUp.get('email');
   }
-  // Chưa hiểu get lắm
+
   get password() {
     return this.formLogUp.get('password');
   }
@@ -92,6 +95,7 @@ export class LogUpComponent implements OnInit {
   getLatestUser(){
     this.commonService.getAllUser().subscribe((response) => {
       this.allUser = response;
+      console.log(response)
     })
   }
 
@@ -99,10 +103,11 @@ export class LogUpComponent implements OnInit {
   editUser(user) {
     this.isEdit = true;
     // this.userObj = user;
-    this.formLogUp.reset(this.userObj);
+    this.formLogUp.reset(user);
+    // this.formLogUp.reset(this.userObj);
     //reset: The form now resets, all the input fields go back to their initial state and any valid, touched or dirty properties are also reset to their starting values.
     // trả về giá trị ban đầu của form, tất cả là giá trị là rỗng name:'', mobile:'', email='', password=''
-    this.formLogUp.patchValue(user);
+    // this.formLogUp.patchValue(user);
     // set giá trị của user được click "edit" hiện có vào lại, lúc này chưa update
   }
 

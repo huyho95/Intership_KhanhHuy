@@ -12,6 +12,8 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { ColorNumberDirective } from './color-number.directive';
+import { NzInputModule } from 'ng-zorro-antd/input';
+
 
 @NgModule({
   declarations: [SignInComponent, SignUpComponent, LogUpComponent, ColorNumberDirective],
@@ -23,7 +25,8 @@ import { ColorNumberDirective } from './color-number.directive';
     ReactiveFormsModule,
     OverlayModule,
     NzFormModule,
-    NzDatePickerModule
+    NzDatePickerModule,
+    NzInputModule  
   ],
   providers: [NzModalService]
 

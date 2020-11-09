@@ -8,7 +8,7 @@
         <nz-form-item >
             <nz-form-label for="">Full name</nz-form-label>
             <nz-form-control>
-                <input nz-input formControlName="name" >
+                <input class="w-25" nz-input formControlName="name" >
             </nz-form-control>
         </nz-form-item>
         <div *ngIf="name.errors?.required">
@@ -26,13 +26,13 @@
         <nz-form-item>
             <nz-form-label for="">Mobile Number</nz-form-label>
             <nz-form-control>
-                <input nz-input formControlName="mobile" >
+                <input class="w-25" nz-input formControlName="mobile" >
             </nz-form-control>
         </nz-form-item>
         <nz-form-item >
             <nz-form-label for="">Email Address</nz-form-label>
             <nz-form-control>
-                <input nz-input formControlName="email" >
+                <input class="w-25" nz-input formControlName="email" >
             </nz-form-control>
         </nz-form-item>
         <div *ngIf="email.errors?.required">
@@ -48,7 +48,7 @@
         <nz-form-item >
             <nz-form-label for="">Password</nz-form-label>
             <nz-form-control>
-                <input nz-input type="password" formControlName="password">
+                <input class="w-25" nz-input type="password" formControlName="password">
             </nz-form-control>
         </nz-form-item>
         <nz-form-item>
@@ -59,9 +59,9 @@
         </nz-form-item>
         <nz-form-item >
             <nz-form-label for="">Price</nz-form-label>
-            <nz-form-control>
+            <nz-input-group nzSuffix="VND" class="w-25"> 
                 <input nz-input formControlName="pipeNumber">
-            </nz-form-control>
+            </nz-input-group>
         </nz-form-item>
         <br>
         <button nz-button nzType="primary" [disabled]="name.errors?.required || name.errors?.pattern || email.errors?.required || email.errors?.ggmail" (click)="addUser(formLogUp)" *ngIf="!isEdit">Submit</button>
@@ -88,7 +88,7 @@
                 <td>{{ user.email }}</td>
                 <td>{{ user.password }}</td>
                 <td>{{ user.dateOfBirth | date: 'dd-MM-yyyy h:mm a' }}</td>
-                <td appColorNumber>{{ user.pipeNumber | number: '1.0-0' }}</td>
+                <td appColorNumber>{{ user.pipeNumber | number: '1.0-0' }} <span>VND</span></td>
                 <td><button (click)="editUser(user)" class="btn btn-warning" >Edit</button></td>
                 <td><button (click)="showDeleteConfirm(user)" class="btn btn-danger">Delete</button></td>
                 <!-- <button nz-button nzType="dashed" (click)="showDeleteConfirm()">Delete</button> -->
