@@ -5,17 +5,20 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { CryptoJsService } from '../../../crypto-js.service';
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserLoginService {
+  url = 'http://hawadevapi.bys.vn/api/login';
 
-  constructor(private http: HttpClient) { }
-
+  constructor(private http: HttpClient, private EncrDecr: CryptoJsService,) { }
+  
   getUser() : Observable<any> {
     return this.http.get("http://localhost:3000/users")
   }
-
+  
 
   // isLogin(email: string, password: string): boolean {
   //   const listUser = this.getUser();
@@ -31,5 +34,10 @@ export class UserLoginService {
       }, err => {})
     })
    
+  }
+
+  loginConnectApi(a, b): Observable<boolean> {
+    return this.http.post<any>(this.url, { userName: a, password: this.EncrDecr.set('uGa5buIox4+fX4ViZ7p3TyR4cx5evpoBqFsE8dueBqheYs6faRQ1VxCr0oQ1hqXQGyjc8rKA5kWXjHMxAByt0Q==', '123123') , "deviceType": "string",
+    "token": "string"})
   }
 }

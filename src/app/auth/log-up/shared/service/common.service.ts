@@ -24,6 +24,8 @@ export class CommonService {
     return this.http.post('http://localhost:3000/users', userRequest);
   }
 
+  
+
   // createUser(user: User): Observable<any>{
   //   return this.http.post('http://localhost:3000/users', user);
   // }

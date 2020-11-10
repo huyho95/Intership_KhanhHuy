@@ -36,10 +36,10 @@
                         ĐĂNG NHẬP
                         <span style="font-size: 17px; font-weight: bold" class="font-italic">(SIGN IN)</span>
                     </h3>
-                    <span class="inputWithIcon" >
+                    <span class="inputWithIcon display:flex;" >
+                        <i class="far fa-envelope" aria-hidden="true"></i>
                         <input type="email" name="email" #txtEmail="ngModel" class="form-control mt-2"
                             placeholder="Email address (*)" size="100px" ngModel required email />
-                        <i class="far fa-envelope" aria-hidden="true"></i>
                     </span>
                     <div *ngIf="submitted && txtEmail.errors?.required">
                         <span style="color: red; font-size: 13px;text-align: inherit" class="font-italic">
@@ -47,19 +47,22 @@
                         </span>
                     </div>
                     <span class="inputWithIcon1">
-                        <input type="password" name="password" #txtPassword="ngModel" class="form-control mb-2" style="margin-top: 20px"
-                            placeholder="Password (*)" size="100px" ngModel required minlength="8"/>
+                        <input type="password" name="password" #txtPassword="ngModel" class="form-control mb-2 " style="margin-top: 20px"
+                            placeholder="Password (*)" size="100px" ngModel required minlength="8" [type]="hide ? 'password' : 'text'" />
                         <i class="fas fa-lock" aria-hidden="true"></i>
+                        <span>
+                            <i type="button" class="fas fa-eye" (click)="hide = !hide"></i>
+                        </span>
                     </span>
 
-                    <div *ngIf="submitted && txtEmail.errors?.required || submitted && txtPassword.errors?.required || submitted && txtPassword.errors?.minlength">
+                    <!-- <div *ngIf="submitted && txtEmail.errors?.required || submitted && txtPassword.errors?.required || submitted && txtPassword.errors?.minlength">
                         <span style="color: red; font-size: 13px;text-align: inherit" class="font-italic ">
                             Mật khẩu phải có ít nhất 8 kí tự, trong đó có it nhất 1 chữ hoa,
                             1 chữ thường và 1 chữ số. (Password must contain at least 8 characters with at least one
                             Capital letter,
                             at least one lower case letter and at least one number)
                         </span>
-                    </div>
+                    </div> -->
 
                     <div class="w-100 text-right">
                         <a class="text-primary" href="" style="text-decoration: none">Quên mật khẩu <span
@@ -76,6 +79,20 @@
             <div class="col-2"></div>
         </div>
     </div>
+
 </body>
+
+<!-- <script>
+    var pwd = document.getElementById('pwd');
+    var eye = document.getElementById('eye');
+
+    eye.addEventListener('click',togglePass);
+    
+    function togglePass() {
+        eye.classList.toggle('active');
+        (pwd.type == 'password') ? pwd.type == 'text': pwd.type = 'password';
+    }
+</script> -->
+
 
 </html>

@@ -37,6 +37,17 @@ button{
     color: #aaa;
 }
 
+.inputWithIcon1 span  {
+    z-index: 9999;
+    position: absolute;
+    top: 4%;
+    right: 42px;
+}
+
+.inputWithIcon1 .form-control {
+    padding: 6px 30px !important;
+}
+
 .Hover a {
     text-decoration: underline;
 }

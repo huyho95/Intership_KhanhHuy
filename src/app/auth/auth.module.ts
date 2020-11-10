@@ -13,7 +13,8 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { ColorNumberDirective } from './color-number.directive';
 import { NzInputModule } from 'ng-zorro-antd/input';
-
+import { CryptoJsService } from '../auth/crypto-js.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [SignInComponent, SignUpComponent, LogUpComponent, ColorNumberDirective],
@@ -26,9 +27,10 @@ import { NzInputModule } from 'ng-zorro-antd/input';
     OverlayModule,
     NzFormModule,
     NzDatePickerModule,
-    NzInputModule  
+    NzInputModule,
+    HttpClientModule  
   ],
-  providers: [NzModalService]
+  providers: [NzModalService, CryptoJsService]
 
 })
 export class AuthModule { }
