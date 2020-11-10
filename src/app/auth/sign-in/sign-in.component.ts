@@ -50,15 +50,12 @@ export class SignInComponent implements OnInit {
   onSubmit(formSignIn: any) {
     this.submitted = true;
     this.userLoginService.loginConnectApi(formSignIn.form.value.email, formSignIn.form.value.password).subscribe(res => {
-    if (res) {
       // localStorage.setItem('shit', JSON.stringify(formSignIn.form.value) ); // JSON.stringify: chuyển object thành json trên local localStorage
       // this.router.navigate(['/dashboard']);
-      alert(this.message)
-    } else {
       console.log(res)
-    }     
-    })
-   
+      
+    }, err => {
+      console.log('Lỗi rồi', err.error.error.message)
+    }) 
   }
-
 }
