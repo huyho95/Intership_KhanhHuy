@@ -15,6 +15,8 @@ import { ColorNumberDirective } from './color-number.directive';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { CryptoJsService } from '../auth/crypto-js.service';
 import { HttpClientModule } from '@angular/common/http';
+import { UserLoginService } from './sign-in/shared/service/user-login.service';
+
 
 @NgModule({
   declarations: [SignInComponent, SignUpComponent, LogUpComponent, ColorNumberDirective],
@@ -28,9 +30,9 @@ import { HttpClientModule } from '@angular/common/http';
     NzFormModule,
     NzDatePickerModule,
     NzInputModule,
-    HttpClientModule  
+    HttpClientModule, 
   ],
-  providers: [NzModalService, CryptoJsService]
+  providers: [NzModalService, CryptoJsService, UserLoginService]
 
 })
 export class AuthModule { }

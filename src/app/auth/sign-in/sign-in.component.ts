@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 // import { UserLoginService } from 'src/app/shared/service/user-login.service';
 import { UserLoginService } from './shared/service/user-login.service';
 // import { CryptoJsService } from '../crypto-js.service';
+import { TokenParams } from '../tokenParams';
 
 @Component({
   selector: 'app-sign-in',
@@ -14,6 +15,8 @@ export class SignInComponent implements OnInit {
   submitted: boolean;
   // public message = "email or password is incorrect";
   message = "Login successfully !!"
+  tokenParams: TokenParams
+
   constructor(
     private userLoginService: UserLoginService,
     private router: Router,
@@ -47,15 +50,30 @@ export class SignInComponent implements OnInit {
    
   // }
 
+
+
+  // onSubmit(formSignIn: any) {
+  //   this.submitted = true;
+  //   this.userLoginService.loginConnectApi(formSignIn.form.value.email, formSignIn.form.value.password).subscribe(res => {
+  //     // localStorage.setItem('shit', JSON.stringify(formSignIn.form.value) ); // JSON.stringify: chuyển object thành json trên local localStorage
+  //     // this.router.navigate(['/dashboard']);
+  //     console.log(res)
+      
+  //   }, err => {
+  //     console.log('Lỗi rồi', err.error.error.message)
+  //   }) 
+  // }
+
+
+
   onSubmit(formSignIn: any) {
     this.submitted = true;
     this.userLoginService.loginConnectApi(formSignIn.form.value.email, formSignIn.form.value.password).subscribe(res => {
       // localStorage.setItem('shit', JSON.stringify(formSignIn.form.value) ); // JSON.stringify: chuyển object thành json trên local localStorage
       // this.router.navigate(['/dashboard']);
-      console.log(res)
-      
-    }, err => {
-      console.log('Lỗi rồi', err.error.error.message)
+        this.tokenParams = res;
+        this.userLoginService.AccessToken = this.tokenParams.jwtToken;
+        this.router.navigate(['/dashboard'])
     }) 
   }
 }
