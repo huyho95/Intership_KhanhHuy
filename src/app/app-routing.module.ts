@@ -4,11 +4,11 @@ import { AuthGuardService } from './auth/sign-in/shared/service/auth-guard.servi
 
 
 const routes: Routes = [
-  {
-    path: '',
-    pathMatch: 'prefix', //default
-    redirectTo: 'dashboard'
-  },
+  // {
+  //   path: '',
+  //   pathMatch: 'prefix', //default
+  //   redirectTo: 'dashboard'
+  // },
   {
     path: '',
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
@@ -18,7 +18,12 @@ const routes: Routes = [
     path: 'dashboard',
     loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
     canActivate: [AuthGuardService]
-  }
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/user/user.module').then(m => m.UserModule),
+  },
+
 ];
 
 @NgModule({

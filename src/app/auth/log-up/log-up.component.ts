@@ -130,6 +130,7 @@ export class LogUpComponent implements OnInit {
   showDeleteConfirm(user): void {
     this.modal.confirm({
       nzTitle: `Are you sure delete ${ user.email } ?`,
+      // chèn biến vào chuỗi
       // nzContent: '<p>All information associated to profile will be permanently deleted.<br><span class="text-danger">This operation can not be undone.</span></p>',
       nzOnOk: () => this.commonService.deleteUser(user).subscribe(() => {
         this.getLatestUser();

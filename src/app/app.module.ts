@@ -13,13 +13,14 @@ import en from '@angular/common/locales/en';
 import { DrivenFormComponent } from './driven-form/driven-form.component';
 import { AuthGuardService } from './auth/sign-in/shared/service/auth-guard.service';
 
+
 registerLocaleData(en);
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    DrivenFormComponent,
+    DrivenFormComponent
   ],
   imports: [
     BrowserModule,
