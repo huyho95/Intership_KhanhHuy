@@ -3,37 +3,38 @@
     <thead>
         <tr>
             <th scope="col">Full Name</th>
-            <th scope="col">User Name</th>
-            <th scope="col">Email</th>
+            <th scope="col">Representative Name</th>
+            <th scope="col">Representative Email</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>{{ user?.fullName }}</td>
-            <td>{{ user?.userName }}</td>
-            <td>{{ user?.email }}</td>
-            <button class="btn btn-success" (click)="editUser()" >Edit</button>
-            <nz-modal [(nzVisible)]="isVisible" nzTitle="Edit User" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
-                <form [formGroup]="formEditApiUser" nz-form nzLayout="vertical" >
-                    <nz-form-item >
-                        <nz-form-label for="">Full name</nz-form-label>
+            <td>{{ user?.fullNameUser }}</td>
+            <td>{{ user?.accountEmail }}</td>
+            <button class="btn btn-success" (click)="editUser(user)">Edit</button>
+            <nz-modal [(nzVisible)]="isVisible" nzTitle="Edit User" (nzOnCancel)="handleCancel()"
+                (nzOnOk)=" updateUser()">
+                <form [formGroup]="formEditApiUser" nz-form nzLayout="vertical">
+                    <nz-form-item>
+                        <nz-form-label for="">Full Name</nz-form-label>
                         <nz-form-control>
-                            <input class="w-50" nz-input formControlName="fullName" >
+                            <input class="w-50" nz-input formControlName="fullName">
                         </nz-form-control>
                     </nz-form-item>
-                    <nz-form-item >
-                        <nz-form-label for="">User Name</nz-form-label>
+                    <nz-form-item>
+                        <nz-form-label for="">Representative Name</nz-form-label>
                         <nz-form-control>
-                            <input class="w-50" nz-input formControlName="userName" >
+                            <input class="w-50" nz-input formControlName="fullNameUser">
                         </nz-form-control>
                     </nz-form-item>
-                    <nz-form-item >
-                        <nz-form-label for="">Email</nz-form-label>
+                    <nz-form-item>
+                        <nz-form-label for="">Representative Email</nz-form-label>
                         <nz-form-control>
-                            <input class="w-50" nz-input formControlName="email" >
+                            <input class="w-50" nz-input formControlName="accountEmail">
                         </nz-form-control>
                     </nz-form-item>
-                </form>     
+                </form>
             </nz-modal>
         </tr>
     </tbody>
