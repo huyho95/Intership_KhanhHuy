@@ -1,1 +1,40 @@
-<h1>huy</h1>
+<button class="btn btn-danger mt-3 mb-3" routerLink="/sign-in">Back</button>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Full Name</th>
+            <th scope="col">User Name</th>
+            <th scope="col">Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ user?.fullName }}</td>
+            <td>{{ user?.userName }}</td>
+            <td>{{ user?.email }}</td>
+            <button class="btn btn-success" (click)="editUser()" >Edit</button>
+            <nz-modal [(nzVisible)]="isVisible" nzTitle="Edit User" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+                <form [formGroup]="formEditApiUser" nz-form nzLayout="vertical" >
+                    <nz-form-item >
+                        <nz-form-label for="">Full name</nz-form-label>
+                        <nz-form-control>
+                            <input class="w-50" nz-input formControlName="fullName" >
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item >
+                        <nz-form-label for="">User Name</nz-form-label>
+                        <nz-form-control>
+                            <input class="w-50" nz-input formControlName="userName" >
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item >
+                        <nz-form-label for="">Email</nz-form-label>
+                        <nz-form-control>
+                            <input class="w-50" nz-input formControlName="email" >
+                        </nz-form-control>
+                    </nz-form-item>
+                </form>     
+            </nz-modal>
+        </tr>
+    </tbody>
+</table>

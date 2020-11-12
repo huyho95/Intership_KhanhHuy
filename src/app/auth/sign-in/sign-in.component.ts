@@ -71,10 +71,21 @@ export class SignInComponent implements OnInit {
       // localStorage.setItem('shit', JSON.stringify(formSignIn.form.value) ); // JSON.stringify: chuyển object thành json trên local localStorage
       // this.router.navigate(['/dashboard']);
 
-      // localStorage.setItem('userLogin', res.data.jwtToken)
-      localStorage.setItem('userLogin', JSON.stringify(res.data) )
+       // localStorage.setItem('userLogin', res.data.jwtToken)
+      // this.userLoginService.getApiUser().subscribe(res => {
+      // this.router.navigate(['/dashboard/user'])
+      //   console.log(res)
+      // }); 
+
+      localStorage.setItem('userLogin', JSON.stringify(res.data))
+      //JSON.stringify: chuyển object lại chuỗi string
       // localStorage.setItem('userLogin',b) với b là string, res.data.jwtToken khi chỉ lấy mình jwtToken (chuỗi string),
-      // muốn lấy tất cả thông tin thì res.data, mà res.data đang là 1 Object nên phải dùng JSON.stringify để chuyển về chuỗi string 
+      // muốn lấy tất cả thông tin thì res.data, mà res.data đang là 1 Object nên phải dùng JSON.stringify để chuyển về chuỗi string
+
+      // this.userLoginService.getApiUser().subscribe(res => {
+      // this.router.navigate(['/dashboard/user'])
+      //   console.log(res)
+      // });
       this.router.navigate(['/dashboard/user'])
     }, err => {
       console.log('Lỗi rồi, err')
