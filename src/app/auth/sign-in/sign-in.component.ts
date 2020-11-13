@@ -78,6 +78,8 @@ export class SignInComponent implements OnInit {
       // }); 
 
       localStorage.setItem('userLogin', JSON.stringify(res.data))
+      // local storage chỉ lưu dữ liệu ở dạng string, không lưu được Object
+
       //JSON.stringify: chuyển object lại chuỗi string
       // localStorage.setItem('userLogin',b) với b là string, res.data.jwtToken khi chỉ lấy mình jwtToken (chuỗi string),
       // muốn lấy tất cả thông tin thì res.data, mà res.data đang là 1 Object nên phải dùng JSON.stringify để chuyển về chuỗi string

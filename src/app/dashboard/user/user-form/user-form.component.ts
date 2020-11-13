@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserLoginService } from 'src/app/auth/sign-in/shared/service/user-login.service';
 import { User } from '../shared/model/user.model'
-import { FormGroup, FormControl} from '@angular/forms';
+import { FormGroup, FormControl, FormArray, FormBuilder} from '@angular/forms';
+import { ThrowStmt } from '@angular/compiler';
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
@@ -11,7 +12,10 @@ export class UserFormComponent implements OnInit {
   user: User;
   isVisible = false;
   formEditApiUser: FormGroup;
-  constructor(private userLoginService: UserLoginService) { }
+  formEdit : FormGroup;
+  formArray : FormArray
+
+  constructor(private userLoginService: UserLoginService, private fb: FormBuilder) { }
 
   ngOnInit(): void { // ??????????????
     this.userLoginService.getApiUser().subscribe((res) => {
@@ -23,9 +27,53 @@ export class UserFormComponent implements OnInit {
     this.formEditApiUser = new FormGroup({
       fullName: new FormControl(),
       fullNameUser: new FormControl(),
-      accountEmail: new FormControl()
+      accountEmail: new FormControl(),
+    })
+
+    // Start: Form Array kết hợp Form Builder
+
+    this.formEdit = this.fb.group({
+      cvName: '',
+      cvDesciption: '',
+      formArray: this.fb.array([this.createForm()])
     })
   }
+
+  createForm(): FormGroup {
+    return this.fb.group({
+      cvName: '',
+      cvDesciption: '',
+      formChildGroup: this.fb.group({
+        cvName: '',
+        cvDesciption: ''
+      })
+    });
+  }
+
+  get formList() {
+    return this.formEdit.get('formArray') as FormArray;
+  }
+
+  addCV(): void {
+    if (this.formEdit.controls.formArray)
+    // Dòng if ni để làm chi, để xét coi thử hắn có giá trị hay không á
+    // Cái chi có giá trị formArray, this.formEdit đang là formGroup, .controls => ra các formCotrol của formGroup formEdit
+    // . formArray nữa là cái chi :)), bữa sau đặt tên chuẩn xíu nghe Huy, đặt tền loạn xạ :))
+    // OKie,uif rồi răng nữa, đang bị lỗi add form ,hắn vẫn hiện chữ ta nhập lên dòng mới kìa, trong khi set biến mới có giá trị new rồi đóây
+    {
+      this.formList.controls.push(this.createForm());
+    }
+    console.log(this.formEdit)
+  }
+
+  removeCV(index): void {
+    this.formList.controls.splice(index, 1)
+  }
+
+  // End: Form Array kết hợp Form Builder
+
+  
+
 
   // Biến get fullName này đang trả về 1 giá trị là formControl
   get fullName() {
@@ -39,6 +87,16 @@ export class UserFormComponent implements OnInit {
   get accountEmail() {
     return this.formEditApiUser.get('accountEmail');
   }
+
+
+  get cvName() {
+    return this.formEdit.get('cvName');
+  }
+
+  get cvDesciption() {
+    return this.formEdit.get('cvDesciption');
+  }
+
 
   editUser(user) {
     this.isVisible = true;
