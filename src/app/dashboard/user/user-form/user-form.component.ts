@@ -3,6 +3,8 @@ import { UserLoginService } from 'src/app/auth/sign-in/shared/service/user-login
 import { User } from '../shared/model/user.model'
 import { FormGroup, FormControl, FormArray, FormBuilder} from '@angular/forms';
 import { ThrowStmt } from '@angular/compiler';
+import { Builder } from 'protractor';
+import { findIndex } from 'rxjs-compat/operator/findIndex';
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
@@ -13,7 +15,6 @@ export class UserFormComponent implements OnInit {
   isVisible = false;
   formEditApiUser: FormGroup;
   formEdit : FormGroup;
-  formArray : FormArray
 
   constructor(private userLoginService: UserLoginService, private fb: FormBuilder) { }
 
@@ -35,7 +36,7 @@ export class UserFormComponent implements OnInit {
     this.formEdit = this.fb.group({
       cvName: '',
       cvDesciption: '',
-      formArray: this.fb.array([this.createForm()])
+      formParent: this.fb.array([this.createForm()])
     })
   }
 
@@ -43,33 +44,44 @@ export class UserFormComponent implements OnInit {
     return this.fb.group({
       cvName: '',
       cvDesciption: '',
-      formChildGroup: this.fb.group({
-        cvName: '',
-        cvDesciption: ''
-      })
-    });
+      formChild: this.fb.array([]) // Đây là formArray con của formGroup 1 công việc
+    })
   }
 
-  get formList() {
-    return this.formEdit.get('formArray') as FormArray;
+  get formParent() {
+    return this.formEdit.get('formParent') as FormArray;
   }
-
-  addCV(): void {
-    if (this.formEdit.controls.formArray)
+  
+  addCV(index): void {
+    if (this.formEdit.controls.formParent)
     // Dòng if ni để làm chi, để xét coi thử hắn có giá trị hay không á
     // Cái chi có giá trị formArray, this.formEdit đang là formGroup, .controls => ra các formCotrol của formGroup formEdit
     // . formArray nữa là cái chi :)), bữa sau đặt tên chuẩn xíu nghe Huy, đặt tền loạn xạ :))
     // OKie,uif rồi răng nữa, đang bị lỗi add form ,hắn vẫn hiện chữ ta nhập lên dòng mới kìa, trong khi set biến mới có giá trị new rồi đóây
     {
-      this.formList.controls.push(this.createForm());
+      // this.formParent.controls.push(this.createForm());
+      this.formParent.insert(index = index + 1, this.createForm());
+    }
+    console.log(this.formEdit)
+  }
+
+  addExtraCV(form: FormGroup, index) {
+    if (this.formEdit.controls.formParent)
+    {
+      // (form.get('formChild') as FormArray).controls.push(this.createForm());
+      (form.get('formChild') as FormArray).insert(index= index + 1, this.createForm());
     }
     console.log(this.formEdit)
   }
 
   removeCV(index): void {
-    this.formList.controls.splice(index, 1)
-  }
+    this.formParent.controls.splice(index, 1)
+    // Xóa bắt đầu từ phần tử số index (index truyền vào), xóa 1 phần tử 
+  }   
 
+  removeExtraCV(form: FormGroup, index: number) {
+    (form.get('formChild') as FormArray).controls.splice(index,1)
+  }
   // End: Form Array kết hợp Form Builder
 
   

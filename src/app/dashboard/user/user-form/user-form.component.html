@@ -41,7 +41,6 @@
         </nz-form-item>
     </form>
 </nz-modal>
-
 <div class="container mt-4">
     <div class="row">
         <div class="col-4">
@@ -56,22 +55,48 @@
     </div>
 </div>
 <form [formGroup]="formEdit">
-    <div formArrayName="formArray" class="container mt-2">
-        <div class="row my-2" *ngFor="let form of formList.controls; let i = index;">
+    <div class="container" formArrayName="formParent">
+        <ng-container *ngFor="let form of formParent.controls; let i = index;">
             <ng-container [formGroupName]="i">
-                <div class="col-4">
-                    <input class="w-100" formControlName="cvName" placeholder="Nhập tên CV" />
-                </div>
-                <div class="col-4">
-                    <input class="w-100" formControlName="cvDesciption" placeholder="Nhập mô tả" />
-                </div>
-                <div class="col-4">
-                    <div class="d-flex justify-content-center">
-                        <button class="btn btn-primary mr-2" (click)="addCV()">+</button>
-                        <button class="btn btn-danger ml-2" (click)="removeCV()">-</button>
+                <div class="row my-2">
+                    <div class="col-4 pl-0">
+                        <input class="w-100" formControlName="cvName" placeholder="Nhập tên CV" />
+                    </div>
+                    <div class="col-4 pl-0">
+                        <input class="w-100" formControlName="cvDesciption" placeholder="Nhập mô tả" />
+                    </div>
+                    <div class="col-4">
+                        <div class="d-flex justify-content-center">
+                            <button class="btn btn-primary mr-2" (click)="addCV(i, index)">+</button> 
+                            <button class="btn btn-dark" (click)="addExtraCV(form, j)">+</button>
+                            <button [disabled]="i === 0" class="btn btn-danger ml-2" (click)="removeCV(i)">-</button>
+                        </div>
                     </div>
                 </div>
+                <ng-container *ngIf="form.get('formChild').controls">
+                    <ng-container formArrayName="formChild">
+                        <div class="row my-2" *ngFor="let formChild of form.get('formChild').controls; let j = index;">
+                            <ng-container [formGroupName]="j">
+                                <div class="col-4 ">
+                                    <input class="w-100" formControlName="cvName" placeholder="Nhập tên CV" />
+                                </div>
+                                <div class="col-4 ">
+                                    <input class="w-100" formControlName="cvDesciption" placeholder="Nhập mô tả" />
+                                </div>
+                                <div class="col-4">
+                                    <div class="d-flex justify-content-center">
+                                        <button class="btn btn-primary mr-2" (click)="addCV(i, index)">+</button>
+                                        <button class="btn btn-dark" (click)="addExtraCV(form, j)">+</button>
+                                        <button class="btn btn-danger ml-2" (click)="removeExtraCV(form,j)">-</button>
+                                        <!-- đối số form đâu, Bên ni không thấy mi truyền index vô -->
+                                    </div>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </ng-container>
+                </ng-container>
             </ng-container>
-        </div>
+        </ng-container>
+
     </div>
 </form>
