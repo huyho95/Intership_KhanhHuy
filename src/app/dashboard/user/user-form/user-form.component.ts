@@ -33,11 +33,22 @@ export class UserFormComponent implements OnInit {
 
     // Start: Form Array kết hợp Form Builder
 
+    // this.formEdit = this.fb.group({
+    //   cvName: '',
+    //   cvDesciption: '',
+    //   formParent: this.fb.array([this.createForm()])
+    // })
+
     this.formEdit = this.fb.group({
-      cvName: '',
-      cvDesciption: '',
-      formParent: this.fb.array([this.createForm()])
+      works: this.fb.array([
+        this.fb.group ({
+          cvName: '',
+          cvDesciption: '',
+          formChild: this.fb.array([])
+        })
+      ])
     })
+
   }
 
   createForm(): FormGroup {
