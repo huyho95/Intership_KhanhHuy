@@ -5,6 +5,7 @@ import { FormGroup, FormControl, FormArray, FormBuilder} from '@angular/forms';
 import { ThrowStmt } from '@angular/compiler';
 import { Builder } from 'protractor';
 import { findIndex } from 'rxjs-compat/operator/findIndex';
+import { workers } from 'cluster';
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
@@ -44,7 +45,9 @@ export class UserFormComponent implements OnInit {
         this.fb.group ({
           cvName: '',
           cvDesciption: '',
-          formChild: this.fb.array([])
+          works: this.fb.array([
+        //  this.createForm()
+          ])
         })
       ])
     })
@@ -55,44 +58,61 @@ export class UserFormComponent implements OnInit {
     return this.fb.group({
       cvName: '',
       cvDesciption: '',
-      formChild: this.fb.array([]) // Đây là formArray con của formGroup 1 công việc
+      works: this.fb.array([]) // Đây là formArray con của formGroup 1 công việc
     })
+  } 
+  addFormParent(formArray: FormArray) {
+    formArray.push(this.createForm());
+    console.log(this.formEdit)
   }
 
-  get formParent() {
-    return this.formEdit.get('formParent') as FormArray;
+  addFormChild(formGroup: FormGroup) {
+    (formGroup.get('works') as FormArray).push(this.createForm());
   }
+
+  // removeCV(formArray: any, index: number) {
+  //   formArray.splice(index, 1);
+  // }
+
+  removeCV(formArray: FormArray, index: number) {
+    formArray.removeAt(index)
+  }
+
+  // get formParent() {
+  //   return this.formEdit.get('formParent') as FormArray;
+  // }
   
-  addCV(index): void {
-    if (this.formEdit.controls.formParent)
-    // Dòng if ni để làm chi, để xét coi thử hắn có giá trị hay không á
-    // Cái chi có giá trị formArray, this.formEdit đang là formGroup, .controls => ra các formCotrol của formGroup formEdit
-    // . formArray nữa là cái chi :)), bữa sau đặt tên chuẩn xíu nghe Huy, đặt tền loạn xạ :))
-    // OKie,uif rồi răng nữa, đang bị lỗi add form ,hắn vẫn hiện chữ ta nhập lên dòng mới kìa, trong khi set biến mới có giá trị new rồi đóây
-    {
-      // this.formParent.controls.push(this.createForm());
-      this.formParent.insert(index = index + 1, this.createForm());
-    }
-    console.log(this.formEdit)
-  }
+  // addCV(index): void {
+  //   if (this.formEdit.controls.formParent)
+  //   // Dòng if ni để làm chi, để xét coi thử hắn có giá trị hay không á
+  //   // Cái chi có giá trị formArray, this.formEdit đang là formGroup, .controls => ra các formCotrol của formGroup formEdit
+  //   // . formArray nữa là cái chi :)), bữa sau đặt tên chuẩn xíu nghe Huy, đặt tền loạn xạ :))
+  //   // OKie,uif rồi răng nữa, đang bị lỗi add form ,hắn vẫn hiện chữ ta nhập lên dòng mới kìa, trong khi set biến mới có giá trị new rồi đóây
+  //   {
+  //     // this.formParent.controls.push(this.createForm());
+  //     this.formParent.insert(index = index + 1, this.createForm());
+  //   }
+  //   console.log(this.formEdit)
+  // }
 
-  addExtraCV(form: FormGroup, index) {
-    if (this.formEdit.controls.formParent)
-    {
-      // (form.get('formChild') as FormArray).controls.push(this.createForm());
-      (form.get('formChild') as FormArray).insert(index= index + 1, this.createForm());
-    }
-    console.log(this.formEdit)
-  }
+  // addExtraCV(form: FormGroup, index) {
+  //   if (this.formEdit.controls.formParent)
+  //   {
+  //     // (form.get('formChild') as FormArray).controls.push(this.createForm());
+  //     (form.get('formChild') as FormArray).insert(index= index + 1, this.createForm());
+  //   }
+  //   console.log(this.formEdit)
+  // }
 
-  removeCV(index): void {
-    this.formParent.controls.splice(index, 1)
-    // Xóa bắt đầu từ phần tử số index (index truyền vào), xóa 1 phần tử 
-  }   
+  // removeCV(index): void {
+  //   this.formParent.controls.splice(index, 1)
+  //   // Xóa bắt đầu từ phần tử số index (index truyền vào), xóa 1 phần tử 
+  // }   
 
-  removeExtraCV(form: FormGroup, index: number) {
-    (form.get('formChild') as FormArray).controls.splice(index,1)
-  }
+  // removeExtraCV(form: FormGroup, index: number) {
+  //   (form.get('formChild') as FormArray).controls.splice(index,1)
+  // }
+
   // End: Form Array kết hợp Form Builder
 
   
@@ -165,4 +185,6 @@ export class UserFormComponent implements OnInit {
     console.log('Button cancel clicked!');
     this.isVisible = false;
   }
+
+  
 }
