@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserLoginService } from 'src/app/auth/sign-in/shared/service/user-login.service';
 import { User } from '../shared/model/user.model'
 import { FormGroup, FormControl, FormArray, FormBuilder} from '@angular/forms';
-import { ThrowStmt } from '@angular/compiler';
-import { Builder } from 'protractor';
-import { findIndex } from 'rxjs-compat/operator/findIndex';
-import { workers } from 'cluster';
+import { ConfirmComponent } from 'src/app/shared/confirm/confirm.component';
+import { NzModalService } from 'ng-zorro-antd/modal';
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
@@ -14,10 +12,12 @@ import { workers } from 'cluster';
 export class UserFormComponent implements OnInit {
   user: User;
   isVisible = false;
+  isShow = false;
   formEditApiUser: FormGroup;
   formEdit : FormGroup;
 
-  constructor(private userLoginService: UserLoginService, private fb: FormBuilder) { }
+
+  constructor(private userLoginService: UserLoginService, private fb: FormBuilder, private modal: NzModalService) { }
 
   ngOnInit(): void { // ??????????????
     this.userLoginService.getApiUser().subscribe((res) => {
@@ -73,6 +73,7 @@ export class UserFormComponent implements OnInit {
   // removeCV(formArray: any, index: number) {
   //   formArray.splice(index, 1);
   // }
+  // .controls mới dùng hàm xóa này được
 
   removeCV(formArray: FormArray, index: number) {
     formArray.removeAt(index)
@@ -115,8 +116,34 @@ export class UserFormComponent implements OnInit {
 
   // End: Form Array kết hợp Form Builder
 
-  
 
+
+
+  // Start Pop up show thông tin
+
+  showInfo(form: FormArray, user) {
+    this.isShow = true;
+    const modal = this.modal.create({
+      nzTitle: 'Modal Title',
+      nzContent: ConfirmComponent,
+      nzComponentParams: {
+        data: ''
+      },
+    })
+    
+  }
+
+  updateInfo() {
+
+  }
+
+  cancel(): void {
+    console.log('Button cancel clicked!');
+    this.isShow = false;
+  }
+
+
+  // End Pop up show thông tin
 
   // Biến get fullName này đang trả về 1 giá trị là formControl
   get fullName() {
@@ -140,6 +167,8 @@ export class UserFormComponent implements OnInit {
     return this.formEdit.get('cvDesciption');
   }
 
+
+  // Start Pop up Edit User
 
   editUser(user) {
     this.isVisible = true;
@@ -186,5 +215,6 @@ export class UserFormComponent implements OnInit {
     this.isVisible = false;
   }
 
+  // End pop up Edit User
   
 }

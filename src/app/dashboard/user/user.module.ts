@@ -6,6 +6,7 @@ import { UserFormComponent } from './user-form/user-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzModalModule  } from 'ng-zorro-antd/modal';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [UserFormComponent],
@@ -15,7 +16,8 @@ import { NzFormModule } from 'ng-zorro-antd/form';
     FormsModule,
     ReactiveFormsModule,
     NzModalModule,
-    NzFormModule
+    NzFormModule,
+    SharedModule
   ],
   providers: [],
 })

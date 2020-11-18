@@ -20,7 +20,7 @@ registerLocaleData(en);
 @NgModule({
   declarations: [
     AppComponent,
-    DrivenFormComponent
+    DrivenFormComponent,
   ],
   imports: [
     BrowserModule,

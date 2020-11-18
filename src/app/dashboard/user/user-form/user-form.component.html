@@ -1,137 +1,190 @@
-<div class="container">
-    <button class="btn btn-danger mt-3 mb-3" routerLink="/sign-in">Back</button>
-    <table class="w-100">
-        <thead>
-            <tr>
-                <th scope="col">Full Name</th>
-                <th scope="col">Full Name User</th>
-                <th scope="col">Account Email</th>
-                <th scope="col">Edit</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{ user?.fullName }}</td>
-                <td>{{ user?.fullNameUser }}</td>
-                <td>{{ user?.accountEmail }}</td>
-                <td>
-                    <button class="btn btn-success" (click)="editUser(user)">Edit</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <nz-modal [(nzVisible)]="isVisible" nzTitle="Edit User" (nzOnCancel)="handleCancel()" (nzOnOk)="updateUser()">
-        <form [formGroup]="formEditApiUser" nz-form nzLayout="vertical">
-            <nz-form-item>
-                <nz-form-label for="">Full Name</nz-form-label>
-                <nz-form-control>
-                    <input class="w-50" nz-input formControlName="fullName" />
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-label for="">Full Name User</nz-form-label>
-                <nz-form-control>
-                    <input class="w-50" nz-input formControlName="fullNameUser" />
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-label for="">Account Email</nz-form-label>
-                <nz-form-control>
-                    <input class="w-50" nz-input formControlName="accountEmail" />
-                </nz-form-control>
-            </nz-form-item>
-        </form>
-    </nz-modal>
-    <div class="mt-4">
-        <div class="row">
-            <div class="col-4">
-                <p class="text-center">Tên CV</p>
-            </div>
-            <div class="col-4">
-                <p class="text-center">Mô tả</p>
-            </div>
-            <div class="col-4">
-                <p class="text-center">Thao tác</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" />
+</head>
+
+<body>
+    <div class="container">
+        <button class="btn btn-danger mt-3 mb-3" routerLink="/sign-in">Back</button>
+        <table class="w-100">
+            <thead>
+                <tr>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">Full Name User</th>
+                    <th scope="col">Account Email</th>
+                    <th scope="col">Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ user?.fullName }}</td>
+                    <td>{{ user?.fullNameUser }}</td>
+                    <td>{{ user?.accountEmail }}</td>
+                    <td>
+                        <button class="btn btn-success" (click)="editUser(user)">Edit</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <nz-modal [(nzVisible)]="isVisible" nzTitle="Edit User" (nzOnCancel)="handleCancel()" (nzOnOk)="updateUser()">
+            <form [formGroup]="formEditApiUser" nz-form nzLayout="vertical">
+                <nz-form-item>
+                    <nz-form-label for="">Full Name</nz-form-label>
+                    <nz-form-control>
+                        <input class="w-50" nz-input formControlName="fullName" />
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label for="">Full Name User</nz-form-label>
+                    <nz-form-control>
+                        <input class="w-50" nz-input formControlName="fullNameUser" />
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label for="">Account Email</nz-form-label>
+                    <nz-form-control>
+                        <input class="w-50" nz-input formControlName="accountEmail" />
+                    </nz-form-control>
+                </nz-form-item>
+            </form>
+        </nz-modal>
+        <div class="mt-4">
+            <div class="row">
+                <div class="col-4">
+                    <p class="text-center">Tên CV</p>
+                </div>
+                <div class="col-4">
+                    <p class="text-center">Mô tả</p>
+                </div>
+                <div class="col-4">
+                    <p class="text-center">Thao tác</p>
+                </div>
             </div>
         </div>
-    </div>
-    <!-- <form [formGroup]="formEdit">
-        <div class="container" formArrayName="formParent">
-            <ng-container *ngFor="let form of formParent.controls; let i = index;">
-                <ng-container [formGroupName]="i">
-                    <div class="row my-2">
+        <!-- <form [formGroup]="formEdit">
+            <div class="container" formArrayName="formParent">
+                <ng-container *ngFor="let form of formParent.controls; let i = index;">
+                    <ng-container [formGroupName]="i">
+                        <div class="row my-2">
+                            <div class="col-4 pl-0">
+                                <input class="w-100" formControlName="cvName" placeholder="Nhập tên CV" />
+                            </div>
+                            <div class="col-4 pl-0">
+                                <input class="w-100" formControlName="cvDesciption" placeholder="Nhập mô tả" />
+                            </div>
+                            <div class="col-4">
+                                <div class="d-flex justify-content-center">
+                                    <button class="btn btn-primary mr-2" (click)="addCV(i, index)">+</button> 
+                                    <button class="btn btn-dark" (click)="addExtraCV(form, j)">+</button>
+                                    <button [disabled]="i === 0" class="btn btn-danger ml-2" (click)="removeCV(i)">-</button>
+                                </div>
+                            </div>
+                        </div>
+                        <ng-container *ngIf="form.get('formChild').controls">
+                            <ng-container formArrayName="formChild">
+                                <div class="row my-2" *ngFor="let formChild of form.get('formChild').controls; let j = index;">
+                                    <ng-container [formGroupName]="j">
+                                        <div class="col-4 ">
+                                            <input class="w-100" formControlName="cvName" placeholder="Nhập tên CV" />
+                                        </div>
+                                        <div class="col-4 ">
+                                            <input class="w-100" formControlName="cvDesciption" placeholder="Nhập mô tả" />
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="d-flex justify-content-center">
+                                                <button class="btn btn-primary mr-2" (click)="addCV(i, index)">+</button>
+                                                <button class="btn btn-dark" (click)="addExtraCV(form, j)">+</button>
+                                                <button class="btn btn-danger ml-2" (click)="removeExtraCV(form,j)">-</button>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+                </ng-container>
+            </div>
+        </form> -->
+        
+        <form [formGroup]="formEdit" *ngIf="formEdit">
+            <ng-container class="container" formArrayName="works">
+                <!-- <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: formEdit.get('works').controls, padding: 0, stt: '' }"></ng-container> -->
+                <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: formEdit.get('works'), padding: 0, stt: '' }"></ng-container>
+            </ng-container>
+        </form>
+        
+        
+        <ng-template #recursiveList let-controls let-padding="padding" let-stt="stt">
+            <!-- mi đang truyền stt = " " vô chỗ ni hả rứa hả. stt trong dấu ngoặc ni là bằng '' hả,
+            ban đầu nó  = ''
+            Truyền xuống đó -->
+            <ng-container *ngFor="let item of controls.controls; let i=index;">
+                <!-- controls vì let-controls, nếu để let-aaaa thì phải let item of aaa.controls -->
+                <ng-container [formGroup]="item">
+                    <div class="row my-2" [ngStyle]="{'margin-left': padding + 'px'}">
                         <div class="col-4 pl-0">
-                            <input class="w-100" formControlName="cvName" placeholder="Nhập tên CV" />
+                            <div class="d-flex">
+                                {{stt ? stt + '.' + (i + 1) : (i + 1)}}
+                                <input class="w-100 ml-2" formControlName="cvName" placeholder="Nhập tên CV" />
+                            </div>
                         </div>
                         <div class="col-4 pl-0">
                             <input class="w-100" formControlName="cvDesciption" placeholder="Nhập mô tả" />
                         </div>
                         <div class="col-4">
-                            <div class="d-flex justify-content-center">
-                                <button class="btn btn-primary mr-2" (click)="addCV(i, index)">+</button> 
-                                <button class="btn btn-dark" (click)="addExtraCV(form, j)">+</button>
-                                <button [disabled]="i === 0" class="btn btn-danger ml-2" (click)="removeCV(i)">-</button>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <button class="btn btn-warning mr-2" (click)="addFormParent(controls.controls)">+</button> 
+                                <button class="btn btn-dark" (click)="addFormChild(item)">+</button>
+                                <button class="btn btn-danger ml-2" (click)="removeCV(controls, i)">-</button>
+                                <i type="button" class="fas fa-eye ml-3" (click)="showInfo(controls, i, user)"></i>
+                                <nz-modal [(nzVisible)]="isShow" nzTitle="Thông tin" (nzOnCancel)="cancel()" (nzOnOk)="updateInfo()">
+                                    <form  [formGroup]="formEdit" nz-form nzLayout="vertical">
+                                        <nz-form-item>
+                                            <nz-form-label for="">Tên CV</nz-form-label>
+                                            <nz-form-control>
+                                                <input class="w-50" nz-input formControlName="cvName" />
+                                            </nz-form-control>
+                                        </nz-form-item>
+                                        <nz-form-item>
+                                            <nz-form-label for="">Mô tả</nz-form-label>
+                                            <nz-form-control>
+                                                <input class="w-50" nz-input formControlName="cvDesciption" />
+                                            </nz-form-control>
+                                        </nz-form-item>
+                                    </form>
+                                </nz-modal>
                             </div>
                         </div>
                     </div>
-                    <ng-container *ngIf="form.get('formChild').controls">
-                        <ng-container formArrayName="formChild">
-                            <div class="row my-2" *ngFor="let formChild of form.get('formChild').controls; let j = index;">
-                                <ng-container [formGroupName]="j">
-                                    <div class="col-4 ">
-                                        <input class="w-100" formControlName="cvName" placeholder="Nhập tên CV" />
-                                    </div>
-                                    <div class="col-4 ">
-                                        <input class="w-100" formControlName="cvDesciption" placeholder="Nhập mô tả" />
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="d-flex justify-content-center">
-                                            <button class="btn btn-primary mr-2" (click)="addCV(i, index)">+</button>
-                                            <button class="btn btn-dark" (click)="addExtraCV(form, j)">+</button>
-                                            <button class="btn btn-danger ml-2" (click)="removeExtraCV(form,j)">-</button>
-                                        </div>
-                                    </div>
-                                </ng-container>
-                            </div>
-                        </ng-container>
+                    <ng-container *ngIf="item.get('works')?.controls?.length > 0">
+                        <!-- <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item.get('works').controls, padding: padding + 10, stt: stt ? stt + '.' + (i + 1) : (i + 1) }"></ng-container>           -->
+                        <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item.get('works'), padding: padding + 10, stt: stt ? stt + '.' + (i + 1) : (i + 1) }"></ng-container>
+                        <!-- // Xuống chô ni t set lại nè, chỗ ni răn hè
+                        // Hiểu chưa, stt: stt là răn q, stt : stt ? stt + '.' + (i + 1) : (i + 1), gán = đó, ời mà stt : stt, stt trước là gì, stt sau có giá trị không
+                        // Giả sử stt đang  = ''
+                        // stt : '' ? '' + '.' + (i + 1) : (i + 1) = (i + 1) đó
+                        // Giá sử i = 0;
+                        // Giá trị stt sẽ = 0 + 1=  1
+                        // Vòng lặp tiếp theo sẽ nhận đối số stt = 1
+                        // Tiếp tục kiểm tra
+                        //  {{stt ? stt + '.' + (i + 1) : (i + 1)}} => stt + '.' + (i + 1) => 1.(i+1) => Giả sử i trong vòng lặp này = 0 => kết quả sẽ cho ra 1.1
+                        // Hiểu chưa
+                        // okie, để xem lạ
+                        // Huy nên vận dụng tất cả notron, bật chế độ thông minh lên :vertical
+                        // huy mà có nowtron huy khồng rớt kĩ thuật lt 3 lần đâu 
+                        // =)), giỡn chớ làm vài lần rồi quen thôi
+                        // okie -->
                     </ng-container>
                 </ng-container>
             </ng-container>
-        </div>
-    </form> -->
-    
-    <form [formGroup]="formEdit" *ngIf="formEdit">
-        <ng-container class="container" formArrayName="works">
-            <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: formEdit.get('works'), padding: 0, stt: '' }"></ng-container>
-        </ng-container>
-    </form>
-    
-    
-    <ng-template #recursiveList let-controls let-padding="padding" let-stt="stt">
-        <ng-container *ngFor="let item of controls.controls; let i=index;">
-            <ng-container [formGroup]="item">
-                <div class="row my-2" [ngStyle]="{'margin-left': padding + 'px'}">
-                    <div class="col-4 pl-0">
-                        <div class="d-flex">
-                            {{stt ? stt + '.' + (i + 1) : (i + 1)}}
-                            <input class="w-100 ml-2" formControlName="cvName" placeholder="Nhập tên CV" />
-                        </div>
-                    </div>
-                    <div class="col-4 pl-0">
-                        <input class="w-100" formControlName="cvDesciption" placeholder="Nhập mô tả" />
-                    </div>
-                    <div class="col-4">
-                        <div class="d-flex justify-content-center">
-                            <button class="btn btn-primary mr-2" (click)="addFormParent(controls.controls)">+</button> 
-                            <button class="btn btn-dark" (click)="addFormChild(item)">+</button>
-                            <button class="btn btn-danger ml-2" (click)="removeCV(controls, i)">-</button>
-                        </div>
-                    </div>
-                </div>
-                <ng-container *ngIf="item.get('works')?.controls?.length > 0">          
-                    <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item.get('works'), padding: padding + 10, stt: stt ? stt + '.' + (i + 1) : (i + 1) }"></ng-container>
-                </ng-container>
-            </ng-container>
-        </ng-container>
-    </ng-template>
-</div>
+        </ng-template>
+    </div>  
+</body>
+</html>
