@@ -15,7 +15,7 @@ import { ConfirmComponent } from './confirm/confirm.component';
     ConfirmComponent
   ],
   entryComponents: [
-    ConfirmComponent
+    ConfirmComponent // Khi nào mún khai báo pop up
   ]
 })
 export class SharedModule { }

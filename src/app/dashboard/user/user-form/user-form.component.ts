@@ -68,6 +68,7 @@ export class UserFormComponent implements OnInit {
 
   addFormChild(formGroup: FormGroup) {
     (formGroup.get('works') as FormArray).push(this.createForm());
+    console.log(this.formEdit)
   }
 
   // removeCV(formArray: any, index: number) {
@@ -121,14 +122,17 @@ export class UserFormComponent implements OnInit {
 
   // Start Pop up show thông tin
 
-  showInfo(form: FormArray, user) {
+  showInfo(form: FormGroup) {
     this.isShow = true;
     const modal = this.modal.create({
-      nzTitle: 'Modal Title',
+      nzTitle: 'Information',
       nzContent: ConfirmComponent,
       nzComponentParams: {
-        data: ''
-      },
+        data: {
+          cvName : form.value.cvName,
+          cvDesciption: form.value.cvDesciption
+        }
+      }, 
     })
     
   }

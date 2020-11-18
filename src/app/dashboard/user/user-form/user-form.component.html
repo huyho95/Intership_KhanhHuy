@@ -143,8 +143,9 @@
                                 <button class="btn btn-warning mr-2" (click)="addFormParent(controls.controls)">+</button> 
                                 <button class="btn btn-dark" (click)="addFormChild(item)">+</button>
                                 <button class="btn btn-danger ml-2" (click)="removeCV(controls, i)">-</button>
-                                <i type="button" class="fas fa-eye ml-3" (click)="showInfo(controls, i, user)"></i>
-                                <nz-modal [(nzVisible)]="isShow" nzTitle="Thông tin" (nzOnCancel)="cancel()" (nzOnOk)="updateInfo()">
+                                <i type="button" class="fas fa-eye ml-3" (click)="showInfo(item)"></i>
+
+                                <!-- <nz-modal [(nzVisible)]="isShow" nzTitle="Thông tin" (nzOnCancel)="cancel()" (nzOnOk)="updateInfo()">
                                     <form  [formGroup]="formEdit" nz-form nzLayout="vertical">
                                         <nz-form-item>
                                             <nz-form-label for="">Tên CV</nz-form-label>
@@ -159,7 +160,7 @@
                                             </nz-form-control>
                                         </nz-form-item>
                                     </form>
-                                </nz-modal>
+                                </nz-modal> -->
                             </div>
                         </div>
                     </div>
