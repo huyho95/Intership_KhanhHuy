@@ -12,11 +12,11 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 export class UserFormComponent implements OnInit {
   user: User;
   isVisible = false;
-  isShow = false;
   formEditApiUser: FormGroup;
   formEdit : FormGroup;
 
-
+  url : {object};
+  
   constructor(private userLoginService: UserLoginService, private fb: FormBuilder, private modal: NzModalService) { }
 
   ngOnInit(): void { // ??????????????
@@ -123,7 +123,6 @@ export class UserFormComponent implements OnInit {
   // Start Pop up show thông tin
 
   showInfo(form: FormGroup): void {
-    this.isShow = true;
     const modal = this.modal.create({
       nzTitle: 'Modal Title',
       nzContent: ConfirmComponent,
@@ -229,5 +228,19 @@ export class UserFormComponent implements OnInit {
   }
 
   // End pop up Edit User
+
+  
+
+  // Upload Image
+  onSelectFile(event) {
+    if(event.target.files) {
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload=(event: any)=>{
+        this.url = event.target.result;
+      }
+    }
+    console.log(event)
+  }
   
 }

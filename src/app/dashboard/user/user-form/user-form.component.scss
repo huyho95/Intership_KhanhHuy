@@ -2,7 +2,37 @@ table, th, td {
     border: 1px solid black;
 }
 
-th, td {
+th, td { 
     text-align: center;
 }
 
+.icon {
+    margin: 5px;
+    width: 60px;
+    height: 60px;
+    border: #cccccc 2px dashed;
+    background-color: #f2f2f2;
+    color: #cccccc;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.upload-image {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.upload-image input[type=file] {
+    display: none;
+}
+
+.image {
+    margin: 5px;
+    width: 60px;
+    height: 60px;
+    position: relative;
+}

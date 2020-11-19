@@ -34,6 +34,7 @@
                 </tr>
             </tbody>
         </table>
+
         <nz-modal [(nzVisible)]="isVisible" nzTitle="Edit User" (nzOnCancel)="handleCancel()" (nzOnOk)="updateUser()">
             <form [formGroup]="formEditApiUser" nz-form nzLayout="vertical">
                 <nz-form-item>
@@ -56,6 +57,17 @@
                 </nz-form-item>
             </form>
         </nz-modal>
+        <br>
+        <div class="upload-image">
+            <div class="image" *ngFor="let item of url">
+                <img [src]="item" alt="" width="100%" height="100%">
+            </div>
+            <input type="file" accept=".jpg, .jpeg, .png, .gif" #chooseImage (change)="onSelectFile($event)">
+            <div class="icon" (click)="chooseImage.click()">
+                <i class="far fa-file"></i>
+            </div>
+        </div>
+
         <div class="mt-4">
             <div class="row">
                 <div class="col-4">
