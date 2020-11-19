@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Bootstrap Example</title>
     <meta charset="utf-8" />
@@ -77,7 +78,7 @@
                                 <input class="w-100" formControlName="cvName" placeholder="Nhập tên CV" />
                             </div>
                             <div class="col-4 pl-0">
-                                <input class="w-100" formControlName="cvDesciption" placeholder="Nhập mô tả" />
+                                <input class="w-100" formControlName="cvDescription" placeholder="Nhập mô tả" />
                             </div>
                             <div class="col-4">
                                 <div class="d-flex justify-content-center">
@@ -95,7 +96,7 @@
                                             <input class="w-100" formControlName="cvName" placeholder="Nhập tên CV" />
                                         </div>
                                         <div class="col-4 ">
-                                            <input class="w-100" formControlName="cvDesciption" placeholder="Nhập mô tả" />
+                                            <input class="w-100" formControlName="cvDescription" placeholder="Nhập mô tả" />
                                         </div>
                                         <div class="col-4">
                                             <div class="d-flex justify-content-center">
@@ -112,15 +113,20 @@
                 </ng-container>
             </div>
         </form> -->
-        
-        <form [formGroup]="formEdit" *ngIf="formEdit">
-            <ng-container class="container" formArrayName="works">
-                <!-- <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: formEdit.get('works').controls, padding: 0, stt: '' }"></ng-container> -->
-                <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: formEdit.get('works'), padding: 0, stt: '' }"></ng-container>
-            </ng-container>
-        </form>
-        
-        
+
+        <ng-container *ngIf="formEdit">
+            <form [formGroup]="formEdit">
+                <ng-container class="container" formArrayName="works">
+                    <!-- <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: formEdit.get('works').controls, padding: 0, stt: '' }"></ng-container> -->
+                    <ng-container
+                        *ngTemplateOutlet="recursiveList; context:{ $implicit: formEdit.get('works'), padding: 0, stt: '' }">
+                    </ng-container>
+                </ng-container>
+            </form>
+        </ng-container>
+
+
+
         <ng-template #recursiveList let-controls let-padding="padding" let-stt="stt">
             <!-- mi đang truyền stt = " " vô chỗ ni hả rứa hả. stt trong dấu ngoặc ni là bằng '' hả,
             ban đầu nó  = ''
@@ -136,11 +142,12 @@
                             </div>
                         </div>
                         <div class="col-4 pl-0">
-                            <input class="w-100" formControlName="cvDesciption" placeholder="Nhập mô tả" />
+                            <input class="w-100" formControlName="cvDescription" placeholder="Nhập mô tả" />
                         </div>
                         <div class="col-4">
                             <div class="d-flex justify-content-center align-items-center">
-                                <button class="btn btn-warning mr-2" (click)="addFormParent(controls.controls)">+</button> 
+                                <button class="btn btn-warning mr-2"
+                                    (click)="addFormParent(controls.controls)">+</button>
                                 <button class="btn btn-dark" (click)="addFormChild(item)">+</button>
                                 <button class="btn btn-danger ml-2" (click)="removeCV(controls, i)">-</button>
                                 <i type="button" class="fas fa-eye ml-3" (click)="showInfo(item)"></i>
@@ -156,7 +163,7 @@
                                         <nz-form-item>
                                             <nz-form-label for="">Mô tả</nz-form-label>
                                             <nz-form-control>
-                                                <input class="w-50" nz-input formControlName="cvDesciption" />
+                                                <input class="w-50" nz-input formControlName="cvDescription" />
                                             </nz-form-control>
                                         </nz-form-item>
                                     </form>
@@ -166,7 +173,9 @@
                     </div>
                     <ng-container *ngIf="item.get('works')?.controls?.length > 0">
                         <!-- <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item.get('works').controls, padding: padding + 10, stt: stt ? stt + '.' + (i + 1) : (i + 1) }"></ng-container>           -->
-                        <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: item.get('works'), padding: padding + 10, stt: stt ? stt + '.' + (i + 1) : (i + 1) }"></ng-container>
+                        <ng-container
+                            *ngTemplateOutlet="recursiveList; context:{ $implicit: item.get('works'), padding: padding + 10, stt: stt ? stt + '.' + (i + 1) : (i + 1) }">
+                        </ng-container>
                         <!-- // Xuống chô ni t set lại nè, chỗ ni răn hè
                         // Hiểu chưa, stt: stt là răn q, stt : stt ? stt + '.' + (i + 1) : (i + 1), gán = đó, ời mà stt : stt, stt trước là gì, stt sau có giá trị không
                         // Giả sử stt đang  = ''
@@ -186,6 +195,7 @@
                 </ng-container>
             </ng-container>
         </ng-template>
-    </div>  
+    </div>
 </body>
+
 </html>

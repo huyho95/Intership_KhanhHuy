@@ -36,7 +36,7 @@ export class UserFormComponent implements OnInit {
 
     // this.formEdit = this.fb.group({
     //   cvName: '',
-    //   cvDesciption: '',
+    //   cvDescription: '',
     //   formParent: this.fb.array([this.createForm()])
     // })
 
@@ -44,7 +44,7 @@ export class UserFormComponent implements OnInit {
       works: this.fb.array([
         this.fb.group ({
           cvName: '',
-          cvDesciption: '',
+          cvDescription: '',
           works: this.fb.array([
         //  this.createForm()
           ])
@@ -57,7 +57,7 @@ export class UserFormComponent implements OnInit {
   createForm(): FormGroup {
     return this.fb.group({
       cvName: '',
-      cvDesciption: '',
+      cvDescription: '',
       works: this.fb.array([]) // Đây là formArray con của formGroup 1 công việc
     })
   } 
@@ -122,29 +122,37 @@ export class UserFormComponent implements OnInit {
 
   // Start Pop up show thông tin
 
-  showInfo(form: FormGroup) {
+  showInfo(form: FormGroup): void {
     this.isShow = true;
     const modal = this.modal.create({
-      nzTitle: 'Information',
+      nzTitle: 'Modal Title',
       nzContent: ConfirmComponent,
       nzComponentParams: {
         data: {
           cvName : form.value.cvName,
-          cvDesciption: form.value.cvDesciption
-        }
+          cvDescription: form.value.cvDescription
+        },
       }, 
-    })
-    
+    });
+    // Return a result when closed
+    // modal.afterClose.subscribe(result => {
+    //   form.get('cvName').setValue(result.cvName);
+    //   form.get('cvDescription').setValue(result.cvDescription);
+    //   }
+    // ); // set value form control
+
+    modal.afterClose.subscribe(result => {
+      if(result) {
+        form.patchValue({
+          cvName : result.cvName,
+          cvDescription: result.cvDescription
+        });
+      }
+      }
+    ); // set value form group
   }
 
-  updateInfo() {
 
-  }
-
-  cancel(): void {
-    console.log('Button cancel clicked!');
-    this.isShow = false;
-  }
 
 
   // End Pop up show thông tin
@@ -168,8 +176,8 @@ export class UserFormComponent implements OnInit {
     return this.formEdit.get('cvName');
   }
 
-  get cvDesciption() {
-    return this.formEdit.get('cvDesciption');
+  get cvDescription() {
+    return this.formEdit.get('cvDescription');
   }
 
 

@@ -1,4 +1,18 @@
-<h4 style="color: red">Work Name: </h4>
-<span>{{data.cvName}}</span>
-<h4 style="color: blue">Description: {{data.cvDesciption}}</h4>
-<span>{{data.cvDesciption}}</span>
+<div class="form-group">
+    <div>
+        <label for="">Tên CV</label>
+        <input type="text" class="form-control" [(ngModel)]="cvName">
+    </div>  
+    <div>
+        <label for="">Mô tả</label>
+        <input type="text" class="form-control" [(ngModel)]="cvDescription">
+    </div>
+    <div class="mt-4 d-flex justify-content-end align-items-center">
+        <button class="btn btn-success" (click)="update()">Update</button>
+        <button class="btn btn-danger ml-2" (click)="cancel()">Cancel</button>
+    </div>
+</div>
+
+<!-- {{data.cvName}}
+<br>
+{{data.cvDescription}} -->
