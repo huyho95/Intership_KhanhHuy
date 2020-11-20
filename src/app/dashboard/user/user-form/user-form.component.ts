@@ -14,8 +14,13 @@ export class UserFormComponent implements OnInit {
   isVisible = false;
   formEditApiUser: FormGroup;
   formEdit : FormGroup;
+  url: {
+    image: string;
+    thumbImage: string;
+  } [] = [];
 
-  url: string [] = [];
+  showFlag: boolean = false;
+  selectedImageIndex: number = -1;
   
   constructor(private userLoginService: UserLoginService, private fb: FormBuilder, private modal: NzModalService) { }
 
@@ -234,7 +239,8 @@ export class UserFormComponent implements OnInit {
   // Upload Image
   onSelectFile(event) {
     if(event.target.files) {
-      var reader = new FileReader();
+      for (let i = 0; i < event.target.files.length; i ++)  {
+        var reader = new FileReader();
       // target.files cái này đang là mảng, nên lấy file đầu tiên là file up lên, ủa mình upleen mới có file chớ, răn file đầu tiên
       // target.files hắn là kiểu array, cho nên mi up vô là 1 file là phần tử đầu tiên
       // Ví dụ, bay giờ cho phép upload nhiều file, thì target.files là mảng nhiều file nớ đó
@@ -248,18 +254,38 @@ export class UserFormComponent implements OnInit {
       // reader.readAsDataURL => sẽ đọc file mi up lên thành 1 đường dẫnuurl
       // lúc nào hành động biến file thành đường dẫn url thì sẽ nhảnh vô hàm onload
       // Hàm onload ni đang subcrice thằng đường dẫnnurl nớ, nếu xong thì hắn nhảy vô chỗ ni
-      if(event.target.files[0]){
-        reader.readAsDataURL(event.target.files[0]);
+
+      if(event.target.files[i]){
+        reader.readAsDataURL(event.target.files[i]);
       } 
+
       reader.onload = (e: any)=>{
         console.log(e) 
-        this.url = e.target.result;
+        // this.url = e.target.result;
+        this.url.push({
+          image: e.target.result,
+          thumbImage: e.target.result
+        })
       }
-      console.log(event)
-      for (var i = 0; i < event.target.files.length; i++) { 
-        
       }
     }
-
+    event.target.value = null;
+    console.log(event)
   }
+
+  showLightbox(index) {
+    this.showFlag = true;
+    this.selectedImageIndex = index;
+  }
+
+  closeEventHandler() {
+    this.showFlag = false;
+    this.selectedImageIndex = -1;
+  }
+
+  removeSelectedFile(index) {
+    console.log(index)
+    this.url.splice(index, 1)
+  }
+
 }

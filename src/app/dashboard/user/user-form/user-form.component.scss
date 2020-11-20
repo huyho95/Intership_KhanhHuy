@@ -6,7 +6,7 @@ th, td {
     text-align: center;
 }
 
-.icon {
+.icon-image {
     margin: 5px;
     width: 60px;
     height: 60px;
@@ -35,5 +35,16 @@ th, td {
     width: 60px;
     height: 60px;
     position: relative;
+}
+
+.icon-times {
+    position: absolute;
+    top: -2px;
+    right: 0;
+    cursor: pointer;
+    padding: 0.25rem;
     display: none;
+    :hover {
+        display: block;
+    }
 }

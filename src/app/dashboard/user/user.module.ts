@@ -6,6 +6,7 @@ import { UserFormComponent } from './user-form/user-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzModalModule  } from 'ng-zorro-antd/modal';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { NgImageFullscreenViewModule } from 'ng-image-fullscreen-view';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
@@ -17,7 +18,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     ReactiveFormsModule,
     NzModalModule,
     NzFormModule,
-    SharedModule
+    SharedModule,
+    NgImageFullscreenViewModule
   ],
   providers: [],
 })
