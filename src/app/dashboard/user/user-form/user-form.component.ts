@@ -15,7 +15,7 @@ export class UserFormComponent implements OnInit {
   formEditApiUser: FormGroup;
   formEdit : FormGroup;
 
-  url : {object};
+  url: string [] = [];
   
   constructor(private userLoginService: UserLoginService, private fb: FormBuilder, private modal: NzModalService) { }
 
@@ -235,12 +235,31 @@ export class UserFormComponent implements OnInit {
   onSelectFile(event) {
     if(event.target.files) {
       var reader = new FileReader();
-      reader.readAsDataURL(event.target.files[0]);
-      reader.onload=(event: any)=>{
-        this.url = event.target.result;
+      // target.files cái này đang là mảng, nên lấy file đầu tiên là file up lên, ủa mình upleen mới có file chớ, răn file đầu tiên
+      // target.files hắn là kiểu array, cho nên mi up vô là 1 file là phần tử đầu tiên
+      // Ví dụ, bay giờ cho phép upload nhiều file, thì target.files là mảng nhiều file nớ đó
+      // Vì cái input dạng upload file nớ có thể upload nhiều file nên kiểu dữ liệu target.files phải là kiểu mảng
+      // rứa số 0 nớ mình tự gán hả
+      // Thì bây giờ mi không cho hắn upload mutiple thì chắc chắn nếu có file thì chỉ có 1 file
+      // thì làphaair tử đầu tiên chi nữa
+      
+      // Chô ni muốn onload thì phải là kiểu FileReader mà, mi sửa rứa thì a đâu phải là kiểu FileReader
+      // Chỗ ni hắn sẽ chạy như thế này, cứ hiểu thế này nhé
+      // reader.readAsDataURL => sẽ đọc file mi up lên thành 1 đường dẫnuurl
+      // lúc nào hành động biến file thành đường dẫn url thì sẽ nhảnh vô hàm onload
+      // Hàm onload ni đang subcrice thằng đường dẫnnurl nớ, nếu xong thì hắn nhảy vô chỗ ni
+      if(event.target.files[0]){
+        reader.readAsDataURL(event.target.files[0]);
+      } 
+      reader.onload = (e: any)=>{
+        console.log(e) 
+        this.url = e.target.result;
+      }
+      console.log(event)
+      for (var i = 0; i < event.target.files.length; i++) { 
+        
       }
     }
-    console.log(event)
+
   }
-  
 }
