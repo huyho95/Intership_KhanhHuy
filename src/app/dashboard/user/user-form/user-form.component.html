@@ -60,7 +60,7 @@
         <br>
         <div class="upload-image">
             <div class="image" *ngFor="let item of url; let i = index">
-                <img type="button" [src]="item.image" alt="" width="100%" height="100%" (click)="showLightbox(i)" >
+                <img class="item-image" type="button" [src]="item.image" alt="" width="100%" height="100%" (click)="showLightbox(i)" >
                 <div class="icon-times" (click)="removeSelectedFile(i)" >
                     <i class="fas fa-times"></i>
                 </div>
@@ -71,7 +71,7 @@
             </ng-image-fullscreen-view>
             <!-- end library show fullscreen image -->
             <input type="file" accept=".jpg, .jpeg, .png, .gif" #chooseImage (change)="onSelectFile($event)" multiple>
-            <div class="icon-image" (click)="chooseImage.click()" #iconImage>
+            <div *ngIf="url.length < 2" class="icon-image" (click)="chooseImage.click()" #iconImage>
                 <i class="far fa-file"></i>
             </div>
         </div>

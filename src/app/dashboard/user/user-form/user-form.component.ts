@@ -1,41 +1,47 @@
 import { Component, OnInit } from '@angular/core';
 import { UserLoginService } from 'src/app/auth/sign-in/shared/service/user-login.service';
-import { User } from '../shared/model/user.model'
-import { FormGroup, FormControl, FormArray, FormBuilder} from '@angular/forms';
+import { User } from '../shared/model/user.model';
+import { FormGroup, FormControl, FormArray, FormBuilder } from '@angular/forms';
 import { ConfirmComponent } from 'src/app/shared/confirm/confirm.component';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
-  styleUrls: ['./user-form.component.scss']
+  styleUrls: ['./user-form.component.scss'],
 })
 export class UserFormComponent implements OnInit {
   user: User;
   isVisible = false;
   formEditApiUser: FormGroup;
-  formEdit : FormGroup;
+  formEdit: FormGroup;
   url: {
     image: string;
     thumbImage: string;
-  } [] = [];
+  }[] = [];
 
   showFlag: boolean = false;
   selectedImageIndex: number = -1;
-  
-  constructor(private userLoginService: UserLoginService, private fb: FormBuilder, private modal: NzModalService) { }
 
-  ngOnInit(): void { // ??????????????
+  constructor(
+    private userLoginService: UserLoginService,
+    private fb: FormBuilder,
+    private modal: NzModalService
+  ) {}
+
+  ngOnInit(): void {
+    // ??????????????
     this.userLoginService.getApiUser().subscribe((res) => {
       // Đây là user lúc lấy về
       this.user = res.data;
-      console.log(this.user)
+      console.log(this.user);
     });
 
     this.formEditApiUser = new FormGroup({
       fullName: new FormControl(),
       fullNameUser: new FormControl(),
       accountEmail: new FormControl(),
-    })
+    });
 
     // Start: Form Array kết hợp Form Builder
 
@@ -47,33 +53,32 @@ export class UserFormComponent implements OnInit {
 
     this.formEdit = this.fb.group({
       works: this.fb.array([
-        this.fb.group ({
+        this.fb.group({
           cvName: '',
           cvDescription: '',
           works: this.fb.array([
-        //  this.createForm()
-          ])
-        })
-      ])
-    })
-
+            //  this.createForm()
+          ]),
+        }),
+      ]),
+    });
   }
 
   createForm(): FormGroup {
     return this.fb.group({
       cvName: '',
       cvDescription: '',
-      works: this.fb.array([]) // Đây là formArray con của formGroup 1 công việc
-    })
-  } 
+      works: this.fb.array([]), // Đây là formArray con của formGroup 1 công việc
+    });
+  }
   addFormParent(formArray: FormArray) {
     formArray.push(this.createForm());
-    console.log(this.formEdit)
+    console.log(this.formEdit);
   }
 
   addFormChild(formGroup: FormGroup) {
     (formGroup.get('works') as FormArray).push(this.createForm());
-    console.log(this.formEdit)
+    console.log(this.formEdit);
   }
 
   // removeCV(formArray: any, index: number) {
@@ -82,13 +87,13 @@ export class UserFormComponent implements OnInit {
   // .controls mới dùng hàm xóa này được
 
   removeCV(formArray: FormArray, index: number) {
-    formArray.removeAt(index)
+    formArray.removeAt(index);
   }
 
   // get formParent() {
   //   return this.formEdit.get('formParent') as FormArray;
   // }
-  
+
   // addCV(index): void {
   //   if (this.formEdit.controls.formParent)
   //   // Dòng if ni để làm chi, để xét coi thử hắn có giá trị hay không á
@@ -113,17 +118,14 @@ export class UserFormComponent implements OnInit {
 
   // removeCV(index): void {
   //   this.formParent.controls.splice(index, 1)
-  //   // Xóa bắt đầu từ phần tử số index (index truyền vào), xóa 1 phần tử 
-  // }   
+  //   // Xóa bắt đầu từ phần tử số index (index truyền vào), xóa 1 phần tử
+  // }
 
   // removeExtraCV(form: FormGroup, index: number) {
   //   (form.get('formChild') as FormArray).controls.splice(index,1)
   // }
 
   // End: Form Array kết hợp Form Builder
-
-
-
 
   // Start Pop up show thông tin
 
@@ -133,10 +135,10 @@ export class UserFormComponent implements OnInit {
       nzContent: ConfirmComponent,
       nzComponentParams: {
         data: {
-          cvName : form.value.cvName,
-          cvDescription: form.value.cvDescription
+          cvName: form.value.cvName,
+          cvDescription: form.value.cvDescription,
         },
-      }, 
+      },
     });
     // Return a result when closed
     // modal.afterClose.subscribe(result => {
@@ -145,19 +147,15 @@ export class UserFormComponent implements OnInit {
     //   }
     // ); // set value form control
 
-    modal.afterClose.subscribe(result => {
-      if(result) {
+    modal.afterClose.subscribe((result) => {
+      if (result) {
         form.patchValue({
-          cvName : result.cvName,
-          cvDescription: result.cvDescription
+          cvName: result.cvName,
+          cvDescription: result.cvDescription,
         });
       }
-      }
-    ); // set value form group
+    }); // set value form group
   }
-
-
-
 
   // End Pop up show thông tin
 
@@ -174,8 +172,6 @@ export class UserFormComponent implements OnInit {
     return this.formEditApiUser.get('accountEmail');
   }
 
-  
-
   get cvName() {
     return this.formEdit.get('cvName');
   }
@@ -183,7 +179,6 @@ export class UserFormComponent implements OnInit {
   get cvDescription() {
     return this.formEdit.get('cvDescription');
   }
-
 
   // Start Pop up Edit User
 
@@ -223,7 +218,7 @@ export class UserFormComponent implements OnInit {
       // this.user = res.data.fullName;
       // this.user = res.data.fullName;
       this.user = res.data;
-      console.log(this.user)
+      console.log(this.user);
     });
   }
 
@@ -234,43 +229,44 @@ export class UserFormComponent implements OnInit {
 
   // End pop up Edit User
 
-  
-
   // Upload Image
   onSelectFile(event) {
-    if(event.target.files) {
-      for (let i = 0; i < event.target.files.length; i ++)  {
+    if (event.target.files) {
+      const allPromise = [];
+      for (let i = 0; i < event.target.files.length; i++) {
         var reader = new FileReader();
-      // target.files cái này đang là mảng, nên lấy file đầu tiên là file up lên, ủa mình upleen mới có file chớ, răn file đầu tiên
-      // target.files hắn là kiểu array, cho nên mi up vô là 1 file là phần tử đầu tiên
-      // Ví dụ, bay giờ cho phép upload nhiều file, thì target.files là mảng nhiều file nớ đó
-      // Vì cái input dạng upload file nớ có thể upload nhiều file nên kiểu dữ liệu target.files phải là kiểu mảng
-      // rứa số 0 nớ mình tự gán hả
-      // Thì bây giờ mi không cho hắn upload mutiple thì chắc chắn nếu có file thì chỉ có 1 file
-      // thì làphaair tử đầu tiên chi nữa
-      
-      // Chô ni muốn onload thì phải là kiểu FileReader mà, mi sửa rứa thì a đâu phải là kiểu FileReader
-      // Chỗ ni hắn sẽ chạy như thế này, cứ hiểu thế này nhé
-      // reader.readAsDataURL => sẽ đọc file mi up lên thành 1 đường dẫnuurl
-      // lúc nào hành động biến file thành đường dẫn url thì sẽ nhảnh vô hàm onload
-      // Hàm onload ni đang subcrice thằng đường dẫnnurl nớ, nếu xong thì hắn nhảy vô chỗ ni
+        // target.files cái này đang là mảng, nên lấy file đầu tiên là file up lên, ủa mình upleen mới có file chớ, răn file đầu tiên
+        // target.files hắn là kiểu array, cho nên mi up vô là 1 file là phần tử đầu tiên
+        // Ví dụ, bay giờ cho phép upload nhiều file, thì target.files là mảng nhiều file nớ đó
+        // Vì cái input dạng upload file nớ có thể upload nhiều file nên kiểu dữ liệu target.files phải là kiểu mảng
+        // rứa số 0 nớ mình tự gán hả
+        // Thì bây giờ mi không cho hắn upload mutiple thì chắc chắn nếu có file thì chỉ có 1 file
+        // thì làphaair tử đầu tiên chi nữa
 
-      if(event.target.files[i]){
-        reader.readAsDataURL(event.target.files[i]);
-      } 
+        // Chô ni muốn onload thì phải là kiểu FileReader mà, mi sửa rứa thì a đâu phải là kiểu FileReader
+        // Chỗ ni hắn sẽ chạy như thế này, cứ hiểu thế này nhé
+        // reader.readAsDataURL => sẽ đọc file mi up lên thành 1 đường dẫnuurl
+        // lúc nào hành động biến file thành đường dẫn url thì sẽ nhảnh vô hàm onload
+        // Hàm onload ni đang subcrice thằng đường dẫnnurl nớ, nếu xong thì hắn nhảy vô chỗ ni
 
-      reader.onload = (e: any)=>{
-        console.log(e) 
-        // this.url = e.target.result;
-        this.url.push({
-          image: e.target.result,
-          thumbImage: e.target.result
-        })
-      }
+        // if (event.target.files[i]) {
+          reader.readAsDataURL(event.target.files[i]);
+        // }
+        // allPromise.push(Promise.resolve(reader.onload));
+        reader.onload = (e: any) => { // reader.onload: function, e: kết quả của một function
+          console.log(e);
+          // this.url = e.target.result;
+          if (!this.url.some((item) => item.image === e.target.result) &&this.url.length < 2) {
+            this.url.push({
+              image: e.target.result,
+              thumbImage: e.target.result,
+            });
+          }
+        };
       }
     }
     event.target.value = null;
-    console.log(event)
+    console.log(event);
   }
 
   showLightbox(index) {
@@ -284,8 +280,7 @@ export class UserFormComponent implements OnInit {
   }
 
   removeSelectedFile(index) {
-    console.log(index)
-    this.url.splice(index, 1)
+    console.log(index);
+    this.url.splice(index, 1);
   }
-
 }
