@@ -5,6 +5,7 @@ import { FormGroup, FormControl, FormArray, FormBuilder } from '@angular/forms';
 import { ConfirmComponent } from 'src/app/shared/confirm/confirm.component';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { Observable } from 'rxjs';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.component.html',
@@ -26,7 +27,8 @@ export class UserFormComponent implements OnInit {
   constructor(
     private userLoginService: UserLoginService,
     private fb: FormBuilder,
-    private modal: NzModalService
+    private modal: NzModalService,
+    private notification: NzNotificationService
   ) {}
 
   ngOnInit(): void {
@@ -234,36 +236,65 @@ export class UserFormComponent implements OnInit {
     if (event.target.files) {
       const allPromise = [];
       for (let i = 0; i < event.target.files.length; i++) {
-        var reader = new FileReader();
-        // target.files cái này đang là mảng, nên lấy file đầu tiên là file up lên, ủa mình upleen mới có file chớ, răn file đầu tiên
-        // target.files hắn là kiểu array, cho nên mi up vô là 1 file là phần tử đầu tiên
-        // Ví dụ, bay giờ cho phép upload nhiều file, thì target.files là mảng nhiều file nớ đó
-        // Vì cái input dạng upload file nớ có thể upload nhiều file nên kiểu dữ liệu target.files phải là kiểu mảng
-        // rứa số 0 nớ mình tự gán hả
-        // Thì bây giờ mi không cho hắn upload mutiple thì chắc chắn nếu có file thì chỉ có 1 file
-        // thì làphaair tử đầu tiên chi nữa
+        // // Upload từng File
+        // var reader = new FileReader();
+        // // target.files cái này đang là mảng, nên lấy file đầu tiên là file up lên, ủa mình upleen mới có file chớ, răn file đầu tiên
+        // // target.files hắn là kiểu array, cho nên mi up vô là 1 file là phần tử đầu tiên
+        // // Ví dụ, bay giờ cho phép upload nhiều file, thì target.files là mảng nhiều file nớ đó
+        // // Vì cái input dạng upload file nớ có thể upload nhiều file nên kiểu dữ liệu target.files phải là kiểu mảng
+        // // rứa số 0 nớ mình tự gán hả
+        // // Thì bây giờ mi không cho hắn upload mutiple thì chắc chắn nếu có file thì chỉ có 1 file
+        // // thì làphaair tử đầu tiên chi nữa
+        // // Chô ni muốn onload thì phải là kiểu FileReader mà, mi sửa rứa thì a đâu phải là kiểu FileReader
+        // // Chỗ ni hắn sẽ chạy như thế này, cứ hiểu thế này nhé
+        // // reader.readAsDataURL => sẽ đọc file mi up lên thành 1 đường dẫnuurl
+        // // lúc nào hành động biến file thành đường dẫn url thì sẽ nhảnh vô hàm onload
+        // // Hàm onload ni đang subcrice thằng đường dẫnnurl nớ, nếu xong thì hắn nhảy vô chỗ ni
+        // // if (event.target.files[i]) {
+        // reader.readAsDataURL(event.target.files[i]);
+        // // allPromise.push(Promise.resolve(reader.onload));
+        // reader.onload = (e: any) => { // reader.onload: function, e: kết quả của một function
+        //   console.log(e);
+        //   // this.url = e.target.result;
+        //   if (!this.url.some((item) => item.image === e.target.result) && this.url.length < 2) {
+        //     this.url.push({
+        //       image: e.target.result,
+        //       thumbImage: e.target.result,
+        //     });
+        //   }
+        // };
 
-        // Chô ni muốn onload thì phải là kiểu FileReader mà, mi sửa rứa thì a đâu phải là kiểu FileReader
-        // Chỗ ni hắn sẽ chạy như thế này, cứ hiểu thế này nhé
-        // reader.readAsDataURL => sẽ đọc file mi up lên thành 1 đường dẫnuurl
-        // lúc nào hành động biến file thành đường dẫn url thì sẽ nhảnh vô hàm onload
-        // Hàm onload ni đang subcrice thằng đường dẫnnurl nớ, nếu xong thì hắn nhảy vô chỗ ni
-
-        // if (event.target.files[i]) {
-          reader.readAsDataURL(event.target.files[i]);
-        // }
-        // allPromise.push(Promise.resolve(reader.onload));
-        reader.onload = (e: any) => { // reader.onload: function, e: kết quả của một function
-          console.log(e);
-          // this.url = e.target.result;
-          if (!this.url.some((item) => item.image === e.target.result) &&this.url.length < 2) {
+        // Chờ đợi tất cả các file upload xong
+        allPromise.push(
+          new Promise((resolve, reject) => {
+            var reader = new FileReader();
+            reader.onload = (e) => resolve(e.target.result);
+            reader.onerror = reject;
+            reader['readAsDataURL'](event.target.files[i]);
+          })
+        );
+      }
+      Promise.all(allPromise).then(values => {
+        (values || []).every((itemDataURL) => {
+          if (this.url.length === 2) {
+            this.notification.create(
+              'error',
+              'Thông báo',
+              'Upload nhiều quá nghe'
+            );
+            return false;
+          }
+          if (
+            !this.url.some((item) => item.image === itemDataURL)
+          ) {
             this.url.push({
-              image: e.target.result,
-              thumbImage: e.target.result,
+              image: itemDataURL,
+              thumbImage: itemDataURL,
             });
           }
-        };
-      }
+          return true;
+        });
+      });
     }
     event.target.value = null;
     console.log(event);
