@@ -250,13 +250,14 @@ export class UserFormComponent implements OnInit {
         // // reader.readAsDataURL => sẽ đọc file mi up lên thành 1 đường dẫnuurl
         // // lúc nào hành động biến file thành đường dẫn url thì sẽ nhảnh vô hàm onload
         // // Hàm onload ni đang subcrice thằng đường dẫnnurl nớ, nếu xong thì hắn nhảy vô chỗ ni
+        
         // // if (event.target.files[i]) {
         // reader.readAsDataURL(event.target.files[i]);
         // // allPromise.push(Promise.resolve(reader.onload));
         // reader.onload = (e: any) => { // reader.onload: function, e: kết quả của một function
         //   console.log(e);
         //   // this.url = e.target.result;
-        //   if (!this.url.some((item) => item.image === e.target.result) && this.url.length < 2) {
+        //   if (!this.url.some((item) => item.image === e.target.result) && this.url.length < 2) { 
         //     this.url.push({
         //       image: e.target.result,
         //       thumbImage: e.target.result,
@@ -274,9 +275,10 @@ export class UserFormComponent implements OnInit {
           })
         );
       }
+     
       Promise.all(allPromise).then(values => {
-        (values || []).every((itemDataURL) => {
-          if (this.url.length === 2) {
+        (values || []).every((itemDataURL) => { 
+          if (this.url.length === 2) {  // sau khi có lệnh this.url.push ở dưới thì this.url.length mới được tăng lên 1. 
             this.notification.create(
               'error',
               'Thông báo',
@@ -296,8 +298,9 @@ export class UserFormComponent implements OnInit {
         });
       });
     }
-    event.target.value = null;
+    // event.target.value = null; // nếu không có dòng ni thì nếu update trùng một ảnh thì sẽ không nhảy vào hàm onSelectFile ở trên
     console.log(event);
+    console.log(this.url)
   }
 
   showLightbox(index) {
