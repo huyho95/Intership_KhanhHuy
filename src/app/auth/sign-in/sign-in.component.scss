@@ -1,84 +1,171 @@
-.Mybody{
-    background: #87CEFA;
-}
-.Content{
-    height: 100vh;
-}
-button{
+// .Mybody{
+//     background: #87CEFA;
+// }
+// .Content{
+//     height: 100vh;
+// }
+// button{
+//     width: 100%;
+// }
+
+
+// .inputWithIcon input[type=email] {
+//     padding-left: 30px;
+// }
+
+// .inputWithIcon1 input[type=password] {
+//     padding-left: 30px;
+// }
+
+// .inputWithIcon , .inputWithIcon1 {
+//     position: relative;
+// } 
+
+// .inputWithIcon i {
+//     position: absolute;
+//     left: -14px;
+//     top: 6px;
+//     padding: 9px 23px;
+//     color: #aaa;
+// }
+
+// .inputWithIcon1 i {
+//     position: absolute;
+//     left: -12px;
+//     top: 20px;
+//     padding: 9px 23px;
+//     color: #aaa;
+// }
+
+// .inputWithIcon1 span  {
+//     z-index: 9999;
+//     position: absolute;
+//     top: 4%;
+//     right: 42px;
+// }
+
+// .inputWithIcon1 .form-control {
+//     padding: 6px 30px !important;
+// }
+
+// .Hover a {
+//     text-decoration: underline;
+// }
+
+// .Hover a:hover {
+//     text-decoration: none;
+// }
+
+// img {
+//     position: absolute;
+//     margin: auto;
+//     top: 0;
+//     left: 0;
+//     right: 0;
+//     bottom: 0;
+// }
+
+// .powered-by {
+//     color: #fff;
+//     position: absolute;
+//     width: 100%;
+//     bottom: 25px;
+//     left: -1px;
+//     text-align: center;
+// }
+
+// .container-fluid {
+//     padding: 60px 60px;
+// }   
+
+// .Home {
+//     font-size: 30px;
+//     color: #006400;
+// }
+
+.left-col {
+    text-align: center;
+    background: url(../../../assets/images/auth-bg-left.jpg) 0 0/cover no-repeat;
+    overflow: auto;
     width: 100%;
-}
-
-
-.inputWithIcon input[type=email] {
-    padding-left: 30px;
-}
-
-.inputWithIcon1 input[type=password] {
-    padding-left: 30px;
-}
-
-.inputWithIcon , .inputWithIcon1 {
+    height: 100%;
     position: relative;
-} 
+}
 
-.inputWithIcon i {
+.content-1 {
+    font-size: 1.2rem !important;
+    color: #fff;
+    font-weight: 700;
+}
+.content-2 {
+    font-size: .9rem !important;
+    font-style: italic;
+    color: #fff;
+    font-weight: 700;
+}
+.content-3 {
+    margin-bottom: 0.5em;
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 1.35;
+}
+.powered-by {
+    color: #f3f3f3;
+    width: 100%;
     position: absolute;
-    left: -14px;
-    top: 6px;
-    padding: 9px 23px;
-    color: #aaa;
-}
-
-.inputWithIcon1 i {
-    position: absolute;
-    left: -12px;
-    top: 20px;
-    padding: 9px 23px;
-    color: #aaa;
-}
-
-.inputWithIcon1 span  {
-    z-index: 9999;
-    position: absolute;
-    top: 4%;
-    right: 42px;
-}
-
-.inputWithIcon1 .form-control {
-    padding: 6px 30px !important;
-}
-
-.Hover a {
-    text-decoration: underline;
-}
-
-.Hover a:hover {
-    text-decoration: none;
-}
-
-img {
-    position: absolute;
-    margin: auto;
-    top: 0;
-    left: 0;
-    right: 0;
     bottom: 0;
 }
 
-.powered-by {
-    color: #fff;
-    position: absolute;
-    width: 100%;
-    bottom: 25px;
-    left: -1px;
-    text-align: center;
+.content {
+    background: #fff;
+    border-radius: 10px;
+    width: 40rem;
 }
-
-.container-fluid {
-    padding: 60px 60px;
-}   
-
-.Home {
-    font-size: 30px;
-    color: #006400;
+.sub-font-italic {
+    font-style: italic;
+    font-size: 14.4px !important;
+}
+.form-content {
+    margin-left: 7%;
+    margin-right: 7%;
+    width: 100%;
+    padding: 1.5rem 0;
+}
+.ant-input-prefix {
+    color: rgba(0, 0, 0, 0.25);
+    left: 12px;
+    position: absolute;
+    top: 45%;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    color: black;
+    line-height: 0;
+    transform: translateY(-50%);
+}
+.ant-input {
+    padding-left: 30px;
+}
+.right-col {
+    background-color: #0d6c42;
+}
+.font-italic {
+    font-size: 11px;
+}
+.ant-btn {
+    font-size: 15px;
+    line-height: 1;
+    min-height: 36px;
+}
+.ant-btn-primary {
+    color: #fff;
+    background-color: #0d6c42;
+    border-color: #0d6c42;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+}
+.button-font-italic {
+    font-style: italic;
+    font-size: 13px !important;
 }

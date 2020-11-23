@@ -269,7 +269,10 @@ export class UserFormComponent implements OnInit {
         allPromise.push(
           new Promise((resolve, reject) => {
             var reader = new FileReader();
-            reader.onload = (e) => resolve(e.target.result);
+            reader.onload = (e: any) => {
+              resolve(e.target.result);
+              // console.log(e.target.result);
+            } 
             reader.onerror = reject;
             reader['readAsDataURL'](event.target.files[i]);
           })
@@ -277,7 +280,7 @@ export class UserFormComponent implements OnInit {
       }
      
       Promise.all(allPromise).then(values => {
-        (values || []).every((itemDataURL) => { 
+        (values || []).every((itemDataURL) => { // hàm dừng lại khi có 1 giá trị sai, trái ngược với some (hàm dừng lại khi có 1 giá trị đúng)
           if (this.url.length === 2) {  // sau khi có lệnh this.url.push ở dưới thì this.url.length mới được tăng lên 1. 
             this.notification.create(
               'error',
@@ -298,7 +301,7 @@ export class UserFormComponent implements OnInit {
         });
       });
     }
-    // event.target.value = null; // nếu không có dòng ni thì nếu update trùng một ảnh thì sẽ không nhảy vào hàm onSelectFile ở trên
+    event.target.value = null; // nếu không có dòng ni thì nếu update trùng một ảnh thì sẽ không nhảy vào hàm onSelectFile ở trên
     console.log(event);
     console.log(this.url)
   }

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" />
 </head>
 
-<body class="Mybody">
+<!-- <body class="Mybody">
     <div class="container-fluid Content">
         <div class="row h-100">
             <div class="col-2"></div>
@@ -55,14 +55,14 @@
                         </span>
                     </span>
 
-                    <!-- <div *ngIf="submitted && txtEmail.errors?.required || submitted && txtPassword.errors?.required || submitted && txtPassword.errors?.minlength">
+                    <div *ngIf="submitted && txtEmail.errors?.required || submitted && txtPassword.errors?.required || submitted && txtPassword.errors?.minlength">
                         <span style="color: red; font-size: 13px;text-align: inherit" class="font-italic ">
                             Mật khẩu phải có ít nhất 8 kí tự, trong đó có it nhất 1 chữ hoa,
                             1 chữ thường và 1 chữ số. (Password must contain at least 8 characters with at least one
                             Capital letter,
                             at least one lower case letter and at least one number)
                         </span>
-                    </div> -->
+                    </div>
 
                     <div class="w-100 text-right">
                         <a class="text-primary" href="" style="text-decoration: none">Quên mật khẩu <span
@@ -79,6 +79,60 @@
             <div class="col-2"></div>
         </div>
     </div>
+</body> -->
 
+<body>
+    <div class="fluid-container h-100">
+        <div class="row m-0 p-0 h-100">
+            <div class="col-5 p-0 ">
+                <div class="left-col">
+                    <div class="d-flex flex-column justify-content-center align-items-center h-100">
+                        <div class="text-center mb-4 px-2">
+                            <img src="../../../assets/images/logo-hawa-dds.png" alt="">
+                            <h5 class="content-1">HỆ THỐNG GIẢI TRÌNH VÀ TRUY XUẤT NGUỒN GỐC GỖ</h5>
+                            <h6 class="content-2">(THE DUE DILIGENCE AND TRACEABILITY SYSTEM FOR TIMBER)</h6>
+                        </div>
+                        <div class="powered-by mt-4">
+                            <div class="mb-4">
+                                <p class="mb-0"> @ 2020 HAWA. ALL rights reserved </p>
+                                <p> Powered by BYS </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-7 p-0 d-flex flex-column justify-content-center align-items-center right-col">
+                <div class="content my-4">
+                    <div class="form">
+                        <div class="top-title">
+                            <h2 class="text-center content-3">ĐĂNG NHẬP <span class="sub-font-italic">(SIGN IN)</span></h2>
+                        </div>
+                        <div class="d-flex">
+                            <form action="" class="form-content">
+                                <nz-input-group class="my-2">
+                                    <span class="ant-input-prefix"><i style="color: rgba(0, 0, 0, 0.25)" class="far fa-envelope"></i></span>
+                                    <input type="text" class="ant-input" nz-input placeholder="Email/UserName (*)">
+                                </nz-input-group>
+                                                                <nz-input-group class="my-2">
+                                    <span class="ant-input-prefix"><i style="color: rgba(0, 0, 0, 0.25)" class="fas fa-lock"></i></span>
+                                    <input type="password"  class="ant-input" nz-input placeholder="Mật khẩu (Password) (*)">
+                                </nz-input-group>
+                                <div class="text-right py-4">
+                                    <a href="" class="login-form-forgot">Quên mật khẩu <span class="font-italic">(Forgot password)</span></a>
+                                </div>
+                                <button nz-button type="submit" class="w-100 mb-3 ant-btn ant-btn-primary">
+                                    <span> ĐĂNG NHẬP <span class="button-font-italic">(SIGN IN)</span></span>
+                                </button>
+                            </form>
+                        </div>
+                        <div class="footer text-center ">
+                            <a href="" class="text-underline">Bạn chưa có tài khoản? - Đăng ký tại đây</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>
